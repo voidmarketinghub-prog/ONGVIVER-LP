@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tijolinho Viver — Construtores da Esperança | ONG Viver</title>
+<meta name="description" content="Adquira seu tijolinho por 12x de R$ 100, ajude a concluir a nova sede da ONG Viver e tenha seu nome estampado para sempre na parede da casa que acolhe crianças e adolescentes com câncer." />
+<meta property="og:title" content="De tijolinho em tijolinho, ampliamos sonhos — ONG Viver" />
+<meta property="og:description" content="Seu tijolinho vira um pedacinho real da nova casa da Viver — e seu nome fica na parede dessa história. 12x de R$ 100 no cartão ou PIX recorrente." />
+<meta property="og:image" content="assets/og-campanha.jpg" />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/png" href="assets/flor-viver.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fauna+One&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --yellow:#FFD419;
+  --yellow-soft:#FFE466;
+  --yellow-deep:#F7B500;
+  --orange:#F58220;
+  --orange-deep:#E86A00;
+  --red:#E23B4E;
+  --red-deep:#C92B3D;
+  --green-wa:#25D366;
+  --ink:#2E2E2C;
+  --ink-2:#3C3C3B;
+  --ink-soft:#6E6E6A;
+  --cream:#FFFBEE;
+  --white:#FFFFFF;
+  --shadow-sm:0 2px 10px rgba(46,46,44,.07);
+  --shadow-md:0 12px 34px rgba(46,46,44,.13);
+  --shadow-lg:0 30px 70px rgba(46,46,44,.20);
+  --radius:20px;
+  --radius-lg:30px;
+  --wrap:1180px;
+  --ease:cubic-bezier(.22,.8,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Montserrat',system-ui,sans-serif;
+  color:var(--ink);background:var(--white);
+  line-height:1.65;font-size:16px;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+/* ---------- kicker / titles ---------- */
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--orange-deep);margin-bottom:16px;
+}
+.kicker::before{content:"";width:26px;height:3px;border-radius:3px;background:var(--orange)}
+.title{font-family:'Fauna One',serif;font-weight:400;font-size:clamp(27px,3.6vw,42px);line-height:1.22;letter-spacing:-.005em;text-wrap:balance}
+.lead,.hero-sub,.final p{text-wrap:pretty}
+.lead{font-size:clamp(16px,1.6vw,18px);color:var(--ink-soft);max-width:640px;margin-top:14px}
+.sec-head{max-width:780px;margin-bottom:56px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head.center .lead{margin-left:auto;margin-right:auto;text-wrap:balance}
+.sec-head.center .kicker{justify-content:center}
+.sec-head.center .kicker::before{display:none}
+section{padding:100px 0;position:relative}
+
+/* ---------- buttons (modern) ---------- */
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;
+  padding:17px 34px;border-radius:999px;cursor:pointer;border:0;
+  transition:transform .22s var(--spring), box-shadow .22s var(--ease), filter .2s;
+  min-height:54px;overflow:hidden;isolation:isolate;
+}
+.btn::before{ /* shine sweep */
+  content:"";position:absolute;top:0;bottom:0;left:-80%;width:45%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-20deg);transition:left .7s var(--ease);z-index:1;pointer-events:none;
+}
+.btn:hover::before{left:130%}
+.btn > *{position:relative;z-index:2}
+.btn:active{transform:scale(.96)}
+.btn-red{
+  background:linear-gradient(180deg,#F0596B,var(--red-deep));
+  color:#fff;
+  box-shadow:0 12px 28px rgba(201,43,61,.38), inset 0 2px 0 rgba(255,255,255,.28), inset 0 -3px 0 rgba(0,0,0,.14);
+}
+.btn-red:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(201,43,61,.46), inset 0 2px 0 rgba(255,255,255,.28), inset 0 -3px 0 rgba(0,0,0,.14)}
+.btn-sun{
+  background:linear-gradient(180deg,var(--yellow),var(--yellow-deep));
+  color:var(--ink);
+  box-shadow:0 12px 28px rgba(247,181,0,.42), inset 0 2px 0 rgba(255,255,255,.5), inset 0 -3px 0 rgba(0,0,0,.10);
+}
+.btn-sun:hover{transform:translateY(-3px);box-shadow:0 20px 42px rgba(247,181,0,.5), inset 0 2px 0 rgba(255,255,255,.5), inset 0 -3px 0 rgba(0,0,0,.10)}
+.btn-glass{
+  background:rgba(255,255,255,.14);color:#fff;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.btn-glass:hover{background:rgba(255,255,255,.26);transform:translateY(-3px)}
+.btn-dark{background:var(--ink);color:#fff;box-shadow:0 12px 26px rgba(0,0,0,.25), inset 0 2px 0 rgba(255,255,255,.12)}
+.btn-dark:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(0,0,0,.3), inset 0 2px 0 rgba(255,255,255,.12)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:8px}
+
+/* ---------- scroll progress ---------- */
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:200;
+  background:linear-gradient(90deg,var(--yellow),var(--orange));border-radius:0 4px 4px 0;}
+
+/* ---------- navbar ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+.nav-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:78px;display:flex;align-items:center;gap:28px}
+.nav-logo img{height:40px;width:auto;transition:opacity .2s}
+.nav-logo .logo-dark{display:none}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{font-size:14.5px;font-weight:600;color:#fff;position:relative;padding:6px 0;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:3px;border-radius:3px;background:var(--yellow);transition:right .25s var(--ease)}
+.nav-links a:hover::after{right:0}
+.nav-cta{margin-left:6px;padding:12px 26px;font-size:14.5px;min-height:46px}
+.nav.solid{background:rgba(255,255,255,.94);backdrop-filter:blur(14px);box-shadow:var(--shadow-md)}
+.nav.solid .nav-links a{color:var(--ink)}
+.nav.solid .logo-white{display:none}
+.nav.solid .logo-dark{display:block}
+.nav-burger{display:none;margin-left:auto;background:none;border:0;cursor:pointer;padding:10px}
+.nav-burger span{display:block;width:24px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:.25s}
+.nav.solid .nav-burger span{background:var(--ink)}
+.mobile-menu{display:none}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:140px 0 170px;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;animation:kenburns 22s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09) translate(-1%,1%)}}
+.hero-overlay{
+  position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(180deg, rgba(24,20,8,.62) 0%, rgba(24,20,8,.32) 42%, rgba(24,20,8,.78) 100%),
+    radial-gradient(90% 60% at 50% 108%, rgba(247,181,0,.28), transparent 60%);
+}
+.hero-content{text-align:center;max-width:900px;margin:0 auto;padding:0 24px}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.35);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-radius:999px;padding:8px 22px 8px 9px;
+  font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  margin-bottom:30px;box-shadow:0 8px 30px rgba(0,0,0,.2);
+}
+.hero-chip img{width:42px;height:42px}
+.hero h1{
+  font-family:'Baloo 2',cursive;font-weight:800;
+  font-size:clamp(40px,6vw,74px);line-height:1.04;color:#fff;
+  letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.35);text-wrap:balance;
+}
+.hero h1 .hl{color:var(--yellow);padding:0 2px}
+@media (min-width:761px){
+  .hero h1 .hl{position:relative;display:inline-block}
+  .hero h1 .hl::after{ /* sublinhado caligráfico (apenas desktop) */
+    content:"";position:absolute;left:2%;right:2%;bottom:-.12em;height:.15em;
+    background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M4 10 Q60 2 100 6 T196 6" fill="none" stroke="%23F7B500" stroke-width="6" stroke-linecap="round"/></svg>') center/100% 100% no-repeat;
+  }
+}
+.hero-sub{
+  font-size:clamp(16px,1.9vw,20px);color:rgba(255,255,255,.94);max-width:680px;
+  margin:26px auto 38px;font-weight:500;text-shadow:0 2px 14px rgba(0,0,0,.4);
+}
+.hero-sub strong{color:var(--yellow);font-weight:800}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center}
+.hero-micro{margin-top:20px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.82);display:flex;justify-content:center;align-items:center;gap:8px}
+.scroll-hint{
+  position:absolute;left:50%;bottom:120px;transform:translateX(-50%);
+  width:28px;height:46px;border:2px solid rgba(255,255,255,.6);border-radius:16px;
+}
+.scroll-hint::after{
+  content:"";position:absolute;left:50%;top:8px;width:5px;height:9px;margin-left:-2.5px;
+  border-radius:3px;background:var(--yellow);animation:scrollDot 1.8s var(--ease) infinite;
+}
+@keyframes scrollDot{0%{transform:translateY(0);opacity:1}70%{transform:translateY(16px);opacity:0}100%{transform:translateY(0);opacity:0}}
+
+/* stats glass cards overlapping hero */
+.stats-float{position:relative;z-index:5;margin-top:-92px;margin-bottom:10px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{ /* tijolinho 3D */
+  position:relative;
+  background:linear-gradient(180deg,#FFDA3D,var(--yellow));
+  border-radius:10px;padding:26px 18px 24px;text-align:center;
+  box-shadow:
+    7px 7px 0 0 #E39B00,
+    7px 7px 0 1px rgba(232,106,0,.25),
+    18px 24px 44px rgba(46,46,44,.22);
+  transition:transform .25s var(--spring), box-shadow .25s;
+}
+.stat .furo{ /* furo do bloco de madeira */
+  position:absolute;top:12px;left:14px;width:15px;height:15px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #B67E00 0%, #8f6300 68%);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.55);
+}
+.stat::before{ /* flor da Viver como marca d'água */
+  content:"";position:absolute;right:6px;bottom:2px;width:64px;height:72px;
+  background:url('assets/flor-branca.png') center/contain no-repeat;
+  opacity:.45;pointer-events:none;transform:rotate(-12deg);
+  transition:transform .35s var(--spring), opacity .35s;
+}
+.stat:hover{transform:translate(-3px,-3px);box-shadow:
+  10px 10px 0 0 #E39B00,
+  10px 10px 0 1px rgba(232,106,0,.25),
+  24px 30px 54px rgba(46,46,44,.26)}
+.stat:hover::before{transform:rotate(0deg) scale(1.08);opacity:.55}
+.stat .num{position:relative;z-index:1;font-family:'Fauna One',serif;font-weight:400;font-size:clamp(27px,3vw,38px);line-height:1;color:var(--ink)}
+.stat .num .accent{color:var(--ink)}
+.stat .lbl{position:relative;z-index:1;font-size:11.5px;font-weight:800;color:#7A5B00;margin-top:8px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- história ---------- */
+.story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.story-copy p{margin-bottom:18px;font-size:16.5px;color:#4b4b48}
+.story-copy p strong{color:var(--ink)}
+.story-photos{position:relative;min-height:480px}
+.sp{
+  position:absolute;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg);
+  border:6px solid #fff;transition:transform .3s var(--spring);
+}
+.sp:hover{transform:scale(1.03) rotate(0deg)!important;z-index:4}
+.sp img{width:100%;height:100%;object-fit:cover}
+.sp-1{width:62%;aspect-ratio:4/3;top:0;left:0;transform:rotate(-2deg);z-index:2}
+.sp-2{width:56%;aspect-ratio:3/4;right:0;top:18%;transform:rotate(2.4deg);z-index:3}
+.sp-3{width:46%;aspect-ratio:4/3;left:8%;bottom:0;transform:rotate(-1.2deg);z-index:1}
+.sp .sp-tag{
+  position:absolute;left:12px;bottom:12px;background:rgba(46,46,44,.82);color:#fff;
+  backdrop-filter:blur(6px);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:999px;padding:6px 14px;
+}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px}
+.tl{
+  position:relative;background:var(--cream);border:1.5px solid #F1E9CE;border-radius:var(--radius);
+  padding:22px 20px 20px;transition:transform .25s var(--spring), box-shadow .25s, border-color .25s;
+}
+.tl:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--yellow)}
+.tl .yr{font-family:'Fauna One',serif;font-weight:400;font-size:23px;color:var(--orange-deep)}
+.tl p{font-size:13.5px;color:var(--ink-soft);margin-top:6px;font-weight:500}
+.tl::before{content:"";position:absolute;top:-13px;left:20px;width:26px;height:28px;background:url('assets/flor-dourada.png') center/contain no-repeat;filter:drop-shadow(0 2px 4px rgba(247,181,0,.4))}
+
+/* ---------- vsl ---------- */
+.vsl{background:var(--cream)}
+.vsl-frame{
+  position:relative;max-width:920px;margin:0 auto;border-radius:var(--radius-lg);overflow:hidden;
+  aspect-ratio:16/9;background:var(--ink);box-shadow:var(--shadow-lg);cursor:pointer;
+}
+.vsl-frame img.thumb{width:100%;height:100%;object-fit:cover;opacity:.92;transition:transform .6s var(--ease)}
+.vsl-frame:hover img.thumb{transform:scale(1.04)}
+.vsl-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl-play{
+  position:absolute;inset:0;margin:auto;width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(180deg,#F0596B,var(--red-deep));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 40px rgba(201,43,61,.55), inset 0 2px 0 rgba(255,255,255,.3);
+  transition:transform .25s var(--spring);border:0;cursor:pointer;
+}
+.vsl-play::after{
+  content:"";position:absolute;inset:-14px;border-radius:50%;
+  border:2px solid rgba(226,59,78,.5);animation:pulse 2s var(--ease) infinite;
+}
+@keyframes pulse{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.25);opacity:0}}
+.vsl-frame:hover .vsl-play{transform:scale(1.1)}
+.vsl-play svg{margin-left:6px}
+.vsl-caption{text-align:center;margin-top:20px;font-size:13.5px;color:var(--ink-soft);font-weight:600}
+
+/* ---------- parede de tijolinhos (bg da apresentação) ---------- */
+.has-wall{overflow:hidden}
+.has-wall > .wrap{position:relative;z-index:1}
+.wall{
+  position:absolute;inset:0;pointer-events:none;opacity:.30;
+  -webkit-mask-image:radial-gradient(88% 74% at 50% 46%, transparent 44%, #000 86%);
+  mask-image:radial-gradient(88% 74% at 50% 46%, transparent 44%, #000 86%);
+}
+.wall .wb{
+  position:absolute;border-radius:5px;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.4), inset 0 -2px 0 rgba(0,0,0,.14);
+  opacity:0;transform:translateY(-70px) rotate(-4deg) scale(.7);
+  transition:opacity .4s var(--spring), transform .45s var(--spring);
+}
+.wall .wb.on{opacity:1;transform:none}
+.offer .wall, #faq .wall{
+  opacity:.26;
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 46px,transparent 120px,transparent calc(100% - 120px),#000 calc(100% - 46px),#000 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 46px,transparent 120px,transparent calc(100% - 120px),#000 calc(100% - 46px),#000 100%);
+}
+@media (prefers-reduced-motion: reduce){
+  .wall .wb{opacity:1;transform:none;transition:none}
+}
+@media (max-width:760px){
+  .wall{opacity:.22;-webkit-mask-image:radial-gradient(110% 66% at 50% 44%, transparent 48%, #000 88%);mask-image:radial-gradient(110% 66% at 50% 44%, transparent 48%, #000 88%)}
+}
+
+/* ---------- tijolinho animation ---------- */
+.brickland{
+  background:#FFCB05 url('assets/bg-amarelo.jpg') center/cover no-repeat;
+  text-align:center;overflow:hidden;
+}
+.brick-stage{
+  position:relative;margin:52px auto 0;width:min(560px,92vw);
+  background:rgba(255,255,255,.8);backdrop-filter:blur(8px);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+  padding:48px 20px 40px;
+}
+.brick-grid{
+  --cell:15px;
+  display:grid;grid-template-columns:repeat(26,var(--cell));grid-auto-rows:var(--cell);
+  gap:3px;justify-content:center;
+}
+.brick{
+  width:var(--cell);height:var(--cell);border-radius:4px;
+  opacity:0;transform:translateY(-340px) rotate(-8deg) scale(.6);
+  position:relative;
+}
+.brick.on{
+  animation:brickDrop .62s var(--spring) forwards;
+}
+@keyframes brickDrop{
+  0%{opacity:0;transform:translateY(-340px) rotate(-8deg) scale(.6)}
+  70%{opacity:1;transform:translateY(6px) rotate(2deg) scale(1.04)}
+  100%{opacity:1;transform:translateY(0) rotate(0) scale(1)}
+}
+.brick::after{ /* aresta 3D */
+  content:"";position:absolute;inset:0;border-radius:6px;
+  background:linear-gradient(145deg,rgba(255,255,255,.5) 0%,transparent 45%),
+             linear-gradient(325deg,rgba(0,0,0,.22) 0%,transparent 40%);
+}
+.b-y{background:var(--yellow-deep)}
+.b-o2{background:#FFC400}
+.b-Y{background:var(--yellow)}
+.b-o{background:var(--orange)}
+.b-r{background:var(--red)}
+.b-b{background:#2E8FD8}
+.b-g{background:#3BB25A}
+.b-p{background:#F5A3B5}
+.brick-logo{
+  margin:30px auto 0;width:min(230px,60%);opacity:0;transform:translateY(16px) scale(.92);
+  transition:opacity .8s var(--ease) .2s, transform .8s var(--spring) .2s;
+}
+.brick-stage.done .brick-logo{opacity:1;transform:none}
+.brick-caption{
+  margin-top:14px;font-size:13px;color:var(--ink-soft);font-weight:600;opacity:0;transition:opacity .8s .5s;
+}
+.brick-stage.done .brick-caption{opacity:1}
+.replay{
+  position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;
+  background:#fff;border:0;cursor:pointer;box-shadow:var(--shadow-sm);
+  display:flex;align-items:center;justify-content:center;color:var(--orange-deep);
+  transition:transform .3s var(--spring);
+}
+.replay:hover{transform:rotate(-180deg) scale(1.08)}
+.brickland .btn{margin-top:40px}
+.brickland .title{color:var(--ink)}
+
+/* ---------- oferta ---------- */
+.offer{background:var(--white)}
+.offer-grid{display:grid;grid-template-columns:1fr 470px;gap:60px;align-items:center}
+.offer-benefits{display:flex;flex-direction:column;gap:16px;margin-top:36px}
+.benefit{
+  position:relative;overflow:hidden;
+  background:#fff;border:1.5px solid rgba(232,106,0,.16);
+  border-radius:var(--radius);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;
+  box-shadow:var(--shadow-sm);
+  transition:transform .25s var(--spring), box-shadow .25s, border-color .25s;
+}
+.benefit::before{
+  content:"";position:absolute;right:-18px;bottom:-22px;width:80px;height:90px;
+  background:url('assets/flor-dourada.png') center/contain no-repeat;
+  opacity:.13;pointer-events:none;transform:rotate(-12deg);
+  transition:transform .35s var(--spring), opacity .35s;
+}
+.benefit:hover{transform:translateX(6px);box-shadow:var(--shadow-md);border-color:var(--yellow)}
+.benefit:hover::before{transform:rotate(0deg) scale(1.1);opacity:.22}
+.benefit .b-ico{
+  flex:none;width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);
+}
+.benefit:nth-child(1) .b-ico{background:#FFF3C4}
+.benefit:nth-child(2) .b-ico{background:#FFE0E4}
+.benefit:nth-child(3) .b-ico{background:#FFE8D2}
+.benefit h3{font-family:'Montserrat',sans-serif;font-size:15.5px;font-weight:700;letter-spacing:.01em}
+.benefit p{font-size:14px;color:#55554F;margin-top:2px}
+.buy-card{
+  position:relative;background:#fff;border-radius:var(--radius-lg);padding:42px 38px 38px;
+  box-shadow:var(--shadow-lg);overflow:visible;
+}
+.buy-card::before{ /* borda gradiente */
+  content:"";position:absolute;inset:0;border-radius:var(--radius-lg);padding:2.5px;
+  background:linear-gradient(135deg,var(--yellow),var(--orange) 45%,var(--red));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+.buy-card .selo{position:absolute;top:-38px;right:24px;width:92px;filter:drop-shadow(0 10px 20px rgba(46,46,44,.28));transform:rotate(6deg);transition:transform .3s var(--spring)}
+.buy-card:hover .selo{transform:rotate(0deg) scale(1.06)}
+.buy-card .prod{display:block;font-size:11.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange-deep);max-width:calc(100% - 104px)}
+.buy-card h3{font-family:'Baloo 2',cursive;font-size:34px;font-weight:800;margin:6px 0 2px}
+.buy-price .x{font-family:'Baloo 2',cursive;font-size:52px;font-weight:800;line-height:1.1;
+  background:linear-gradient(135deg,var(--red),var(--orange-deep));
+  -webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.buy-note{font-size:13px;color:var(--ink-soft);font-weight:600;margin:2px 0 18px}
+.buy-list{margin:18px 0 26px;display:flex;flex-direction:column;gap:13px}
+.buy-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;font-weight:500;color:#4b4b48}
+.buy-list li .ck{
+  flex:none;width:22px;height:22px;border-radius:50%;background:#E9F8EE;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+}
+.buy-card .btn{width:100%;font-size:17px}
+.buy-secure{margin-top:15px;text-align:center;font-size:12.5px;color:var(--ink-soft);font-weight:600;display:flex;justify-content:center;align-items:center;gap:7px}
+
+/* ---------- obra ---------- */
+.obra{background:var(--cream)}
+.obra-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.bars{margin-top:36px;display:flex;flex-direction:column;gap:30px}
+.bar-item .bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.bar-item .bar-lbl{font-weight:700;font-size:15px}
+.bar-item .bar-val{font-family:'Baloo 2',cursive;font-weight:800;font-size:22px;color:var(--orange-deep)}
+.bar{height:18px;border-radius:999px;background:#F0EBDA;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.07)}
+.bar > i{
+  display:block;height:100%;width:0;border-radius:999px;position:relative;
+  background:linear-gradient(90deg,var(--yellow-deep),var(--orange));
+  transition:width 1.5s var(--ease);
+}
+.bar > i::after{ /* listras animadas */
+  content:"";position:absolute;inset:0;border-radius:999px;
+  background:repeating-linear-gradient(-55deg,rgba(255,255,255,.22) 0 10px,transparent 10px 20px);
+  animation:stripes 1.2s linear infinite;
+}
+@keyframes stripes{to{background-position:28px 0}}
+.bar-item .bar-sub{font-size:13px;color:var(--ink-soft);margin-top:8px;font-weight:500}
+.fases{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+.fase{
+  font-size:12.5px;font-weight:700;color:var(--ink);
+  background:#fff;border:1.5px solid #EFE7CE;border-radius:999px;padding:8px 16px;
+  display:inline-flex;align-items:center;gap:7px;transition:transform .2s var(--spring), border-color .2s;
+}
+.fase:hover{transform:translateY(-2px);border-color:var(--yellow-deep)}
+.obra-link{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-weight:700;color:var(--orange-deep);font-size:15px;border-bottom:2px solid transparent;transition:border-color .2s,gap .2s}
+.obra-link:hover{border-color:var(--orange-deep);gap:12px}
+.phone{
+  position:relative;margin:0 auto;width:min(320px,80vw);
+  border-radius:44px;background:#1d1d1b;padding:12px;
+  box-shadow:var(--shadow-lg), inset 0 0 0 2px rgba(255,255,255,.09);
+}
+.phone video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:34px;background:#222}
+.phone-tag{
+  position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(180deg,#F0596B,var(--red-deep));color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:999px;padding:8px 20px;white-space:nowrap;box-shadow:0 10px 22px rgba(201,43,61,.42);
+}
+.phone-caption{text-align:center;margin-top:18px;font-size:13.5px;color:var(--ink-soft);font-weight:600}
+
+/* ---------- nova sede ---------- */
+.sede-hero{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:56px}
+.sede-hero img{width:100%;height:auto;transition:transform .8s var(--ease)}
+.sede-hero:hover img{transform:scale(1.02)}
+.sede-hero .tag{
+  position:absolute;left:24px;bottom:24px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
+  border-radius:999px;padding:11px 24px;font-weight:700;font-size:14px;box-shadow:var(--shadow-md);
+  display:flex;align-items:center;gap:9px;
+}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.feature{
+  position:relative;overflow:hidden;
+  background:#fff;border:1.5px solid rgba(232,106,0,.14);border-radius:var(--radius);padding:26px 22px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .25s var(--spring), box-shadow .25s, border-color .25s;
+}
+.feature::before{
+  content:"";position:absolute;right:-16px;bottom:-20px;width:72px;height:82px;
+  background:url('assets/flor-dourada.png') center/contain no-repeat;
+  opacity:.11;pointer-events:none;transform:rotate(-12deg);
+  transition:transform .35s var(--spring), opacity .35s;
+}
+.feature:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:var(--yellow)}
+.feature:hover::before{transform:rotate(0deg) scale(1.1);opacity:.2}
+.feature .f-ico{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feature h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;line-height:1.3;letter-spacing:.01em}
+.feature p{font-size:13.5px;color:var(--ink-soft);margin-top:5px}
+.f-y{background:#FFF3C4}.f-r{background:#FFE0E4}.f-b{background:#DDF1FF}.f-g{background:#E2F6E4}
+
+/* ---------- impacto ---------- */
+.impact{background:#FFCB05 url('assets/bg-amarelo.jpg') center/cover no-repeat}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.imp{
+  position:relative;overflow:hidden;
+  background:#fff;border:1px solid rgba(232,106,0,.16);border-radius:var(--radius);
+  padding:28px 20px;text-align:center;box-shadow:var(--shadow-sm);
+  transition:transform .25s var(--spring), box-shadow .25s;
+}
+.imp::before{
+  content:"";position:absolute;right:-22px;bottom:-26px;width:92px;height:104px;
+  background:url('assets/flor-dourada.png') center/contain no-repeat;
+  opacity:.16;pointer-events:none;transform:rotate(-12deg);
+  transition:transform .35s var(--spring), opacity .35s;
+}
+.imp:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.imp:hover::before{transform:rotate(0deg) scale(1.08);opacity:.28}
+.imp .num{position:relative;z-index:1;font-family:'Fauna One',serif;font-weight:400;font-size:clamp(26px,2.8vw,36px);color:var(--ink);line-height:1}
+.imp .lbl{position:relative;z-index:1;font-size:12px;font-weight:700;color:#8a7a30;margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ---------- instagram ---------- */
+.ig-grid{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center}
+.ig-embed{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);background:#fff;height:480px}
+.ig-embed iframe{width:100%;height:100%;border:0}
+.ig-cta{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.ig-handle{display:flex;align-items:center;gap:14px;font-weight:700;font-size:18px}
+.ig-handle .ig-ico{
+  width:54px;height:54px;border-radius:17px;background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(221,42,123,.35);
+}
+
+/* ---------- PJ / form ---------- */
+.pj{background:var(--ink);color:#EDEDEA;overflow:hidden}
+.pj::before{
+  content:"";position:absolute;inset:0;opacity:.06;pointer-events:none;
+  background:url('assets/bg-amarelo.jpg') center/cover no-repeat;
+}
+.pj .kicker{color:var(--yellow)}
+.pj .title{color:#fff}
+.pj-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;position:relative}
+.pj-copy p{margin-bottom:18px;color:#C9C9C4;font-size:16px}
+.pj-copy p strong{color:var(--yellow)}
+.pj-points{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.pj-points li{display:flex;gap:12px;align-items:flex-start;font-size:15px;font-weight:500;color:#DEDEDA}
+.pj-points .ck{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(255,212,25,.16);display:flex;align-items:center;justify-content:center;margin-top:2px}
+.form-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(10px);border-radius:var(--radius-lg);padding:40px 36px;
+  box-shadow:0 30px 70px rgba(0,0,0,.35);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{position:relative}
+.field.full{grid-column:1/-1}
+.field input,.field textarea{
+  width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);
+  border-radius:14px;padding:24px 18px 10px;color:#fff;font-family:inherit;font-size:15px;font-weight:500;
+  transition:border-color .25s, background .25s, box-shadow .25s;
+}
+.field textarea{min-height:110px;resize:vertical}
+.field label{
+  position:absolute;left:18px;top:17px;font-size:14.5px;color:#9c9c96;font-weight:500;
+  pointer-events:none;transition:all .2s var(--ease);
+}
+.field input:focus,.field textarea:focus{
+  border-color:var(--yellow);background:rgba(255,255,255,.1);
+  box-shadow:0 0 0 4px rgba(255,212,25,.14);outline:none;
+}
+.field input:focus + label, .field input:not(:placeholder-shown) + label,
+.field textarea:focus + label, .field textarea:not(:placeholder-shown) + label{
+  top:8px;font-size:11px;color:var(--yellow);font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+}
+.form-card .btn{width:100%;margin-top:22px}
+.form-note{margin-top:14px;text-align:center;font-size:12.5px;color:#9c9c96;font-weight:500}
+
+/* ---------- quem é a viver ---------- */
+.about-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+.about-visual{text-align:center}
+.pgrid{
+  display:grid;grid-template-columns:1.05fr .95fr;
+  grid-auto-rows:clamp(150px,15vw,225px);gap:20px;text-align:left;
+}
+.pg{
+  position:relative;margin:0;border:5px solid #fff;border-radius:18px;overflow:hidden;
+  box-shadow:var(--shadow-md);transition:transform .3s var(--spring), box-shadow .3s;
+}
+.pg:hover{transform:rotate(0deg) scale(1.02)!important;box-shadow:var(--shadow-lg)}
+.pg-1{grid-row:span 2;transform:rotate(-1.6deg)}
+.pg-2{transform:rotate(1.6deg)}
+.pg-3{transform:rotate(-1.2deg)}
+.pg img{width:100%;height:100%;object-fit:cover;display:block}
+.pg figcaption{
+  position:absolute;left:10px;bottom:10px;background:rgba(46,46,44,.82);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  border-radius:999px;padding:5px 12px;
+}
+.mission-chip{
+  display:inline-block;margin-top:24px;transform:rotate(-1.2deg);
+  background:var(--yellow);color:var(--ink);border-radius:999px;padding:12px 28px;
+  font-family:'Fauna One',serif;font-size:16px;white-space:nowrap;
+  box-shadow:0 12px 30px rgba(247,181,0,.45), inset 0 2px 0 rgba(255,255,255,.5);
+}
+
+/* ---------- faq ---------- */
+.faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+details{
+  position:relative;background:#fff;border:1.5px solid rgba(232,106,0,.16);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow .25s,border-color .25s;
+}
+details::after{
+  content:"";position:absolute;right:-14px;bottom:-18px;width:64px;height:72px;
+  background:url('assets/flor-dourada.png') center/contain no-repeat;
+  opacity:.09;pointer-events:none;transform:rotate(-12deg);
+}
+details:hover{border-color:var(--yellow-deep)}
+summary:hover{background:linear-gradient(90deg,#FFFDF0,transparent 70%)}
+details[open]{box-shadow:var(--shadow-md);border-color:var(--yellow)}
+summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:22px 26px;font-weight:700;font-size:16.5px;
+}
+summary::-webkit-details-marker{display:none}
+summary .plus{
+  flex:none;width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(180deg,var(--yellow),var(--yellow-deep));
+  display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-size:22px;font-weight:700;
+  transition:transform .3s var(--spring);box-shadow:inset 0 2px 0 rgba(255,255,255,.5);
+}
+details[open] summary .plus{transform:rotate(45deg)}
+details .ans{padding:0 26px 24px;font-size:15px;color:#55554F}
+
+/* ---------- cta final ---------- */
+.final{
+  background:#FFCB05 url('assets/bg-amarelo.jpg') center/cover no-repeat;
+  text-align:center;overflow:hidden;padding:130px 0;
+}
+.final::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 70% at 50% 30%, rgba(255,255,255,.3), transparent 70%);
+  pointer-events:none;
+}
+.final .wrap{position:relative}
+.final h2{
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(30px,4.6vw,54px);
+  color:#fff;text-shadow:0 3px 0 rgba(232,106,0,.5), 0 16px 40px rgba(232,106,0,.3);
+  max-width:920px;margin:0 auto 22px;line-height:1.07;text-wrap:balance;
+}
+.final p{max-width:640px;margin:0 auto 36px;font-size:17.5px;font-weight:500}
+.final .btn{font-size:18px;padding:21px 46px}
+.final .micro{margin-top:18px;font-size:13.5px;font-weight:600;color:rgba(46,46,44,.75)}
+.final .selo-big{width:124px;margin:0 auto 28px;filter:drop-shadow(0 12px 26px rgba(46,46,44,.3));animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+
+/* ---------- footer ---------- */
+footer{background:#232321;color:#CFCFCA;font-size:14.5px}
+.foot-top{
+  display:grid;grid-template-columns:1.4fr .8fr 1fr 1.1fr;gap:44px;
+  padding:72px 0 56px;align-items:start;
+}
+.foot-brand img{height:46px;margin-bottom:18px}
+.foot-brand p{max-width:300px;color:#A9A9A3;font-size:13.5px;line-height:1.7}
+.foot-social{display:flex;gap:10px;margin-top:20px}
+.foot-social a{
+  width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;color:#EDEDEA;
+  transition:background .25s, transform .25s var(--spring), color .25s;
+}
+.foot-social a:hover{background:var(--yellow);color:var(--ink);transform:translateY(-4px)}
+footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;font-weight:800}
+.foot-col li{margin-bottom:12px;font-size:13.5px}
+.foot-col a{color:#CFCFCA;transition:color .2s,padding-left .2s}
+.foot-col a:hover{color:var(--yellow);padding-left:4px}
+.foot-cta{
+  background:linear-gradient(145deg,rgba(255,212,25,.12),rgba(245,130,32,.08));
+  border:1px solid rgba(255,212,25,.25);border-radius:var(--radius);padding:26px 24px;
+}
+.foot-cta h5{font-family:'Fauna One',serif;color:#fff;font-size:18px;font-weight:400;line-height:1.35;margin-bottom:8px}
+.foot-cta p{font-size:13px;color:#B9B9B3;margin-bottom:16px}
+.foot-cta .btn{width:100%;padding:13px 20px;min-height:46px;font-size:14.5px}
+.foot-bottom{
+  border-top:1px solid rgba(255,255,255,.09);padding:24px 0;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:12.5px;color:#8f8f8a;
+}
+.foot-bottom b{color:var(--yellow);font-weight:700}
+
+/* ---------- floating stack ---------- */
+.float-stack{
+  position:fixed;right:20px;bottom:20px;z-index:95;
+  display:flex;flex-direction:column;gap:12px;align-items:flex-end;
+}
+.fab{
+  position:relative;width:54px;height:54px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  box-shadow:0 10px 26px rgba(0,0,0,.28), inset 0 2px 0 rgba(255,255,255,.25);
+  transition:transform .25s var(--spring), box-shadow .25s;
+}
+.fab:hover{transform:translateY(-4px) scale(1.07)}
+.fab::before{ /* tooltip */
+  content:attr(data-tip);position:absolute;right:64px;top:50%;transform:translateY(-50%) translateX(8px);
+  background:var(--ink);color:#fff;font-size:12px;font-weight:700;white-space:nowrap;
+  padding:8px 14px;border-radius:10px;opacity:0;pointer-events:none;
+  transition:opacity .25s, transform .25s var(--ease);
+}
+.fab:hover::before{opacity:1;transform:translateY(-50%) translateX(0)}
+.fab-wa{background:linear-gradient(180deg,#31E374,#1DA851)}
+.fab-wa::after{
+  content:"";position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid rgba(37,211,102,.55);animation:pulse 2.2s var(--ease) infinite;
+}
+.fab-ig{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)}
+.fab-mail{background:linear-gradient(180deg,#5a5a56,#3C3C3B)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .bar > i{transition:none}
+  .hero-bg img,.vsl-play::after,.fab-wa::after,.final .selo-big{animation:none}
+  .brick{opacity:1;transform:none}
+  .brick.on{animation:none}
+  .brick-stage .brick-logo,.brick-stage .brick-caption{opacity:1;transform:none}
+  *{animation-duration:.01ms!important}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .offer-grid{grid-template-columns:1fr;gap:48px}
+  .obra-grid,.ig-grid,.story-grid,.pj-grid,.about-grid{grid-template-columns:1fr;gap:48px}
+  .features{grid-template-columns:repeat(2,1fr)}
+  .impact-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-float{margin-top:-70px}
+  .timeline{grid-template-columns:repeat(2,1fr)}
+  .foot-top{grid-template-columns:1fr 1fr;gap:36px}
+  .story-photos{min-height:420px}
+}
+@media (max-width:760px){
+  section{padding:76px 0}
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:block}
+  .mobile-menu{
+    display:flex;flex-direction:column;gap:4px;
+    position:fixed;top:78px;left:0;right:0;z-index:99;
+    background:#fff;box-shadow:var(--shadow-lg);padding:18px 24px 26px;
+    transform:translateY(-130%);transition:transform .35s var(--ease);
+  }
+  .mobile-menu.open{transform:none}
+  .mobile-menu a{padding:13px 6px;font-weight:600;font-size:16px;border-bottom:1px solid #F2EFE4;color:var(--ink)}
+  .mobile-menu .btn{margin-top:14px;border:0}
+  .hero{padding:130px 0 150px}
+  .hero-ctas .btn{width:100%}
+  .scroll-hint{display:none}
+  .form-grid{grid-template-columns:1fr}
+  .hero{padding-bottom:130px}
+  .hero-chip{
+    padding:7px 16px 7px 8px;font-size:10px;letter-spacing:.06em;line-height:1.35;
+    gap:9px;margin-bottom:22px;max-width:94%;text-align:left;
+  }
+  .hero-chip img{width:30px;height:30px;flex:none}
+  .hero h1{font-size:clamp(31px,9vw,40px)}
+  .hero-sub{font-size:14.5px;line-height:1.6;max-width:92%}
+  .hero-micro{font-size:11.5px;padding:0 30px;text-align:center}
+  .hero-ctas{gap:12px}
+  .btn{font-size:15px;padding:15px 22px;min-height:50px}
+  .final .btn{font-size:15px;padding:16px 20px;width:100%;max-width:360px;white-space:nowrap}
+  .final .micro{font-size:12px}
+  .final .selo-big{width:96px}
+  .float-stack{right:12px;bottom:88px;gap:10px}
+  .fab{width:44px;height:44px}
+  .fab svg{width:20px;height:20px}
+  .fab-mail{display:none}
+  .fab::before{display:none} /* tooltips não fazem sentido no touch */
+  .title{font-size:clamp(23px,6.6vw,30px)}
+  .lead{font-size:15px}
+  .bar-item .bar-top{flex-direction:column;align-items:flex-start;gap:2px}
+  .bar-item .bar-val{font-size:19px}
+  .buy-price .x{font-size:42px}
+  .buy-card h3{font-size:28px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px 18px;padding:48px 0 36px}
+  .foot-brand{grid-column:1/-1}
+  .foot-cta{grid-column:1/-1}
+  .foot-brand p{font-size:12.5px;max-width:none}
+  .foot-col li{margin-bottom:9px;font-size:13px}
+  footer h4{margin-bottom:14px}
+  .foot-bottom{justify-content:center;text-align:center}
+  .buy-card{padding:34px 24px}
+  .float-stack{right:14px;bottom:14px}
+  .brick-grid{--cell:11px;gap:2px}
+  .sp-1{width:70%}.sp-2{width:60%}.sp-3{width:52%}
+  .story-photos{min-height:340px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="topo">
+  <div class="nav-inner">
+    <a href="#topo" class="nav-logo" aria-label="ONG Viver — início">
+      <img class="logo-white" src="assets/logo-viver-branco.png" alt="ONG Viver" />
+      <img class="logo-dark" src="assets/logo-viver.png" alt="ONG Viver" />
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#historia">Nossa história</a>
+      <a href="#video">A Viver</a>
+      <a href="#obra">A obra</a>
+      <a href="#sede">A nova sede</a>
+      <a href="#empresas">Empresas</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a href="#adquirir" class="btn btn-red nav-cta">Quero meu tijolinho</a>
+    <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menu móvel">
+  <a href="#historia">Nossa história</a>
+  <a href="#video">A Viver</a>
+  <a href="#obra">A obra</a>
+  <a href="#sede">A nova sede</a>
+  <a href="#empresas">Empresas</a>
+  <a href="#faq">Dúvidas</a>
+  <a href="#adquirir" class="btn btn-red">Quero meu tijolinho</a>
+</nav>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Campanha Construtores da Esperança">
+  <div class="hero-bg"><img src="assets/hero-sede.jpg" alt="" fetchpriority="high" /></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <span class="hero-chip rv">
+      <img src="assets/selo-construtores.png" alt="" aria-hidden="true" />
+      Campanha oficial · Construtores da Esperança
+    </span>
+    <h1 class="rv rv-d1">De tijolinho em tijolinho,<br /><span class="hl">ampliamos sonhos.</span></h1>
+    <p class="hero-sub rv rv-d2">
+      Este é o projeto da nova casa da Viver. Adquira o seu tijolinho por <strong>12x de R$&nbsp;100</strong> e tenha o seu <strong>nome estampado para sempre</strong> nas paredes da casa que acolhe crianças e adolescentes com&nbsp;câncer.
+    </p>
+    <div class="hero-ctas rv rv-d3">
+      <a href="#adquirir" class="btn btn-sun">Quero meu tijolinho</a>
+      <a href="#video" class="btn btn-glass">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+        Assistir à apresentação
+      </a>
+    </div>
+    <p class="hero-micro rv rv-d3">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg>
+      R$&nbsp;1.200 em até 12x · Cartão de crédito ou PIX recorrente
+    </p>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"></div>
+</section>
+
+<!-- stats glass -->
+<div class="stats-float">
+  <div class="wrap stats-grid">
+    <div class="stat rv"><span class="furo" aria-hidden="true"></span><div class="num"><span data-count="25">0</span> <span class="accent">anos</span></div><div class="lbl">de acolhimento</div></div>
+    <div class="stat rv rv-d1"><span class="furo" aria-hidden="true"></span><div class="num">+<span data-count="300">0</span></div><div class="lbl">famílias atendidas</div></div>
+    <div class="stat rv rv-d2"><span class="furo" aria-hidden="true"></span><div class="num"><span data-count="90">0</span></div><div class="lbl">municípios do Paraná</div></div>
+    <div class="stat rv rv-d3"><span class="furo" aria-hidden="true"></span><div class="num"><span data-count="55">0</span><span class="accent">%</span></div><div class="lbl">da obra concluída</div></div>
+  </div>
+</div>
+
+<!-- ============ HISTÓRIA ============ -->
+<section id="historia">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-copy">
+        <span class="kicker rv">Nossa história</span>
+        <h2 class="title rv rv-d1">Uma casinha que nasceu do amor. E que o amor fez crescer.</h2>
+        <div class="rv rv-d2" style="margin-top:22px">
+          <p>Em <strong>2001</strong>, um grupo de pessoas de Londrina decidiu que nenhuma criança deveria enfrentar o câncer sem apoio. Nascia a Viver e, com ela, a <strong>"casinha do amor"</strong>: uma sede de 300 m² que virou refúgio de acolhimento, alimento, tratamento e esperança para famílias de 90 municípios do Paraná.</p>
+          <p>Nos últimos anos, o número de crianças e jovens atendidos <strong>dobrou</strong>. E deixar de atender quem procura a Viver nunca esteve em cogitação. Foi assim que nasceu o projeto <strong>Construtores da Esperança</strong>: a construção de uma nova sede com mais de <strong>1.000 m², em 3 andares</strong>. Já aprovada, já em obra, já de pé.</p>
+          <p><strong>Faltam os últimos tijolinhos. E um deles pode ter o seu nome.</strong></p>
+        </div>
+      </div>
+      <div class="story-photos rv rv-d2">
+        <figure class="sp sp-1">
+          <img src="assets/foto-sede-atual.jpg" alt="Fachada da sede atual da ONG Viver, a casinha do amor" loading="lazy" />
+          <figcaption class="sp-tag">A casinha do amor · hoje</figcaption>
+        </figure>
+        <figure class="sp sp-2">
+          <img src="assets/foto-acolhimento.jpg" alt="Voluntária da Viver segurando uma criança no colo, ambas sorrindo" loading="lazy" />
+          <figcaption class="sp-tag">Acolhimento todos os dias</figcaption>
+        </figure>
+        <figure class="sp sp-3">
+          <img src="assets/render-sede.jpg" alt="Projeto da nova sede da Viver" loading="lazy" />
+          <figcaption class="sp-tag">A nova casa · em obras</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl rv"><div class="yr">2001</div><p>A Viver nasce do sonho de amparar crianças e adolescentes com câncer</p></div>
+      <div class="tl rv rv-d1"><div class="yr">2013</div><p>Começa a mobilização pela ampliação da sede: mais de uma década de eventos e doações</p></div>
+      <div class="tl rv rv-d2"><div class="yr">2024</div><p>Nasce a campanha do tijolinho: cada contribuição vira um pedacinho da nova casa</p></div>
+      <div class="tl rv rv-d3"><div class="yr">Hoje</div><p>Obra 55% concluída e cronograma em dia. Faltam os últimos tijolinhos</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VSL ============ -->
+<section class="vsl" id="video">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="kicker">Conheça a Viver</span>
+      <h2 class="title">Antes de qualquer número, conheça a casa que você vai ajudar a construir.</h2>
+      <p class="lead">Há 25 anos a Viver acolhe, ampara e apoia crianças e adolescentes em tratamento contra o câncer, com atendimento integral e gratuito. Aperte o play e veja de perto o sonho que estamos ampliando&nbsp;juntos.</p>
+    </div>
+    <div class="vsl-frame rv rv-d1" id="vsl" role="button" tabindex="0" aria-label="Assistir ao vídeo institucional da campanha">
+      <img class="thumb" src="https://i.ytimg.com/vi/1h99VreK99E/maxresdefault.jpg" alt="Vídeo institucional da campanha Construtores da Esperança" loading="lazy" />
+      <span class="vsl-play" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+      </span>
+    </div>
+    <p class="vsl-caption">Vídeo oficial da campanha Construtores da Esperança · ONG Viver</p>
+  </div>
+</section>
+
+<!-- ============ TIJOLINHOS ANIMADOS ============ -->
+<section class="brickland" aria-label="De tijolinho em tijolinho">
+  <div class="wrap">
+    <div class="sec-head center rv" style="margin-bottom:0">
+      <span class="kicker" style="color:var(--red-deep)">Cada gesto constrói</span>
+      <h2 class="title">É assim que um sonho fica de pé: um tijolinho de cada vez.</h2>
+    </div>
+    <div class="brick-stage rv rv-d1" id="brickStage">
+      <button class="replay" id="replayBricks" aria-label="Repetir animação dos tijolinhos">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12a9 9 0 109-9"/><path d="M3 4v5h5"/></svg>
+      </button>
+      <div class="brick-grid" id="brickGrid" aria-hidden="true"></div>
+      <img class="brick-logo" src="assets/logo-viver.png" alt="Logo da ONG Viver" />
+      <p class="brick-caption">A flor da Viver, construída de tijolinho em tijolinho. Igual à nova sede.</p>
+    </div>
+    <a href="#adquirir" class="btn btn-red rv rv-d2">Colocar meu tijolinho nessa história</a>
+  </div>
+</section>
+
+<!-- ============ OFERTA ============ -->
+<section class="offer" id="adquirir">
+  <div class="wrap offer-grid">
+    <div>
+      <span class="kicker rv" style="color:var(--red-deep)">Adquira um tijolinho e ajude a transformar a Viver</span>
+      <h2 class="title rv rv-d1">Um gesto de R$&nbsp;100 por mês.<br />Um nome gravado para sempre.</h2>
+      <p class="rv rv-d2" style="margin-top:16px;font-size:16.5px;max-width:560px;color:#4b4b48">
+        O tijolinho é a forma de você entrar de vez nessa construção. E, como agradecimento,
+        <strong style="color:var(--ink)">seu nome será estampado em uma das paredes da nova sede</strong>. Quando uma criança
+        atravessar aquele corredor, você estará lá: na parede e na história&nbsp;dela.
+      </p>
+      <div class="offer-benefits">
+        <div class="benefit rv">
+          <span class="b-ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F7B500" stroke-width="2"><rect x="3" y="10" width="18" height="11" rx="1.5"/><path d="M3 15h18M8.5 10v11M15.5 10v5"/><path d="M5 10V6a2 2 0 012-2h10a2 2 0 012 2v4"/></svg>
+          </span>
+          <div><h3>Constrói espaço</h3><p>40 leitos de pernoite, brinquedoteca, refeitório ampliado e consultório odontológico.</p></div>
+        </div>
+        <div class="benefit rv rv-d1">
+          <span class="b-ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E23B4E" stroke-width="2"><path d="M12 21C7 16.5 3 13.3 3 9.3 3 6.4 5.2 4 8 4c1.6 0 3.1.8 4 2 .9-1.2 2.4-2 4-2 2.8 0 5 2.4 5 5.3 0 4-4 7.2-9 11.7z"/></svg>
+          </span>
+          <div><h3>Constrói cuidado</h3><p>Atendimento social, psicológico, nutricional e odontológico, integral e gratuito.</p></div>
+        </div>
+        <div class="benefit rv rv-d2">
+          <span class="b-ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F58220" stroke-width="2"><path d="M12 3l2.2 4.6 5 .7-3.6 3.6.9 5-4.5-2.4-4.5 2.4.9-5L4.8 8.3l5-.7L12 3z"/></svg>
+          </span>
+          <div><h3>Constrói legado</h3><p>Seu nome na parede de uma casa que vai acolher gerações.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buy-card rv rv-d1">
+      <img class="selo" src="assets/selo-construtores.png" alt="" aria-hidden="true" />
+      <span class="prod">Campanha Construtores da Esperança</span>
+      <h3>Tijolinho Viver</h3>
+      <div class="buy-price"><span class="x">12x R$&nbsp;100</span></div>
+      <p class="buy-note">ou R$&nbsp;1.200 à vista · cartão de crédito ou PIX recorrente</p>
+      <ul class="buy-list">
+        <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Nome estampado</strong> em uma das paredes da nova sede</span></li>
+        <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span><span>Parcelamento em até <strong>12x sem complicação</strong></span></li>
+        <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span><span>Você acompanha a obra e a <strong>prestação de contas</strong></span></li>
+        <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span><span>Impacto direto para <strong>~300 famílias</strong> em tratamento</span></li>
+      </ul>
+      <!-- TODO: substituir pelo link do checkout (cartão / PIX recorrente) quando definido pela Viver -->
+      <a href="https://api.whatsapp.com/send?phone=5543996311861&text=Ol%C3%A1!%20Quero%20adquirir%20meu%20tijolinho%20da%20campanha%20Construtores%20da%20Esperan%C3%A7a%20%F0%9F%A7%B1" target="_blank" rel="noopener" class="btn btn-red">Adquirir meu tijolinho</a>
+      <p class="buy-secure">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        Pagamento seguro · ONG Viver · Londrina/PR
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OBRA / PROGRESSO ============ -->
+<section class="obra" id="obra">
+  <div class="wrap obra-grid">
+    <div>
+      <span class="kicker rv">Transparência total</span>
+      <h2 class="title rv rv-d1">A esperança já saiu do papel.<br />Veja onde estamos.</h2>
+      <div class="bars">
+        <div class="bar-item rv rv-d1">
+          <div class="bar-top"><span class="bar-lbl">Obra física</span><span class="bar-val">55%</span></div>
+          <div class="bar"><i data-w="55"></i></div>
+          <p class="bar-sub">Cronograma em dia, com a estrutura do 2º pavimento em execução</p>
+        </div>
+        <div class="bar-item rv rv-d2">
+          <div class="bar-top"><span class="bar-lbl">Meta financeira</span><span class="bar-val">R$&nbsp;4,26 mi de R$&nbsp;8,5 mi</span></div>
+          <div class="bar"><i data-w="50"></i></div>
+          <p class="bar-sub">Faltam R$&nbsp;4,9 milhões para concluir a nova sede</p>
+        </div>
+      </div>
+      <div class="fases rv rv-d2">
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Demolição</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Terraplanagem</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Fundação e alicerce</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Estrutura do 1º pavimento</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Primeira laje</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Estrutura do 2º pavimento</span>
+      </div>
+      <a class="obra-link rv rv-d3" href="https://canva.link/yzkfp3ml9r7kooa" target="_blank" rel="noopener">
+        Ver prestação de contas completa
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="rv rv-d2">
+      <div class="phone">
+        <span class="phone-tag">A obra de perto</span>
+        <video controls playsinline preload="metadata" poster="assets/poster-obra.jpg" aria-label="Vídeo vertical apresentando a obra da nova sede da Viver">
+          <source src="assets/obra-vertical.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+      </div>
+      <p class="phone-caption">Dê o play e visite a obra da nova sede da Viver.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOVA SEDE ============ -->
+<section id="sede">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="kicker">A nova sede</span>
+      <h2 class="title">Uma casa 3x maior.<br />Um cuidado sem limites.</h2>
+      <p class="lead">Mais de 1.000&nbsp;m², em 3&nbsp;andares, para cerca de 300&nbsp;famílias atendidas.</p>
+    </div>
+    <div class="sede-hero rv rv-d1">
+      <img src="assets/render-sede.jpg" alt="Projeto arquitetônico da nova sede da ONG Viver: fachada com tijolos aparentes, janelas redondas coloridas e a flor da Viver no jardim" loading="lazy" />
+      <span class="tag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F7B500" stroke-width="2.4" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v6a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h11"/></svg>
+        Projeto arquitetônico aprovado
+      </span>
+    </div>
+    <div class="features">
+      <div class="feature rv">
+        <span class="f-ico f-y" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F7B500" stroke-width="2"><path d="M3 18v-6a2 2 0 012-2h14a2 2 0 012 2v6"/><path d="M3 18h18M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/></svg></span>
+        <h3>40 leitos de pernoite</h3><p>Para famílias que vêm de longe</p>
+      </div>
+      <div class="feature rv rv-d1">
+        <span class="f-ico f-r" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E23B4E" stroke-width="2"><path d="M4 3v7a3 3 0 006 0V3M7 3v18"/><path d="M17 3c-1.7 1.5-2.5 4-2.5 6.5 0 2 1 3.5 2.5 3.5V21"/></svg></span>
+        <h3>Refeitório ampliado</h3><p>16.469 refeições servidas só em 2025</p>
+      </div>
+      <div class="feature rv rv-d2">
+        <span class="f-ico f-b" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E8FD8" stroke-width="2"><path d="M6 14c-1.7 0-3-1.3-3-3a3 3 0 013-3c0-2.2 1.8-4 4-4 1.8 0 3.3 1.2 3.8 2.8A4 4 0 0121 10c0 2.2-1.8 4-4 4H6z"/><path d="M6 14v3a2 2 0 002 2h8a2 2 0 002-2v-3"/></svg></span>
+        <h3>Cozinha-escola</h3><p>Alimento e aprendizado no mesmo lugar</p>
+      </div>
+      <div class="feature rv rv-d3">
+        <span class="f-ico f-g" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="2"><path d="M12 5.5C10.5 3.6 7.6 3.4 6 5.2c-1.4 1.6-1.3 4 .1 5.7L12 17l5.9-6.1c1.4-1.7 1.5-4.1.1-5.7-1.6-1.8-4.5-1.6-6 .3z"/><path d="M12 17v4"/></svg></span>
+        <h3>Consultório odontológico</h3><p>Cuidado completo durante o tratamento</p>
+      </div>
+      <div class="feature rv">
+        <span class="f-ico f-r" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E23B4E" stroke-width="2"><rect x="3" y="7" width="8" height="8" rx="1.5"/><rect x="13" y="4" width="8" height="8" rx="1.5" transform="rotate(8 17 8)"/><rect x="12" y="14" width="7" height="7" rx="1.5"/></svg></span>
+        <h3>Brinquedoteca</h3><p>Porque criança precisa continuar sendo criança</p>
+      </div>
+      <div class="feature rv rv-d1">
+        <span class="f-ico f-y" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F7B500" stroke-width="2"><circle cx="7" cy="17" r="3"/><path d="M10 17V5l10-2v11"/><circle cx="17" cy="14" r="3"/></svg></span>
+        <h3>Música, artes e leitura</h3><p>Espaço para imaginar e criar</p>
+      </div>
+      <div class="feature rv rv-d2">
+        <span class="f-ico f-g" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.5 2.3 4 5.5 4 9s-1.5 6.7-4 9c-2.5-2.3-4-5.5-4-9s1.5-6.7 4-9z"/><path d="M3 12h18"/></svg></span>
+        <h3>Mini quadra esportiva</h3><p>Movimento, alegria e recuperação</p>
+      </div>
+      <div class="feature rv rv-d3">
+        <span class="f-ico f-b" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E8FD8" stroke-width="2"><path d="M12 3v4M10 5h4"/><path d="M6 21V11l6-4 6 4v10"/><path d="M10 21v-5h4v5"/><path d="M3 21h18"/></svg></span>
+        <h3>Capela e descanso</h3><p>Acolhimento também para a alma</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACTO ============ -->
+<section class="impact">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="kicker" style="color:var(--red-deep)">Prova de impacto · 2025</span>
+      <h2 class="title">Enquanto a obra sobe, o cuidado não para.</h2>
+      <p class="lead" style="color:#7a6a20">Tudo isso aconteceu dentro da "casinha do amor" em 2025.<br />Imagine na casa nova:</p>
+    </div>
+    <div class="impact-grid">
+      <div class="imp rv"><div class="num" data-count="16469">0</div><div class="lbl">refeições servidas</div></div>
+      <div class="imp rv rv-d1"><div class="num" data-count="43392">0</div><div class="lbl">litros de leite integral</div></div>
+      <div class="imp rv rv-d2"><div class="num" data-count="1369">0</div><div class="lbl">atendimentos sociais</div></div>
+      <div class="imp rv rv-d3"><div class="num" data-count="901">0</div><div class="lbl">atendimentos psicológicos</div></div>
+      <div class="imp rv"><div class="num" data-count="1474">0</div><div class="lbl">medicamentos fornecidos</div></div>
+      <div class="imp rv rv-d1"><div class="num" data-count="1499">0</div><div class="lbl">cestas básicas entregues</div></div>
+      <div class="imp rv rv-d2"><div class="num" data-count="367">0</div><div class="lbl">diárias de hospedagem</div></div>
+      <div class="imp rv rv-d3"><div class="num" data-count="65">0</div><div class="lbl">novos casos acolhidos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section id="instagram">
+  <div class="wrap ig-grid">
+    <div class="ig-embed rv">
+      <iframe src="https://www.instagram.com/ongviver/embed" title="Instagram da ONG Viver" loading="lazy" allowtransparency="true"></iframe>
+    </div>
+    <div class="ig-cta">
+      <span class="kicker rv">Redes sociais</span>
+      <h2 class="title rv rv-d1">Todo dia tem esperança sendo construída no nosso Instagram.</h2>
+      <p class="lead rv rv-d2">Acompanhe a rotina da Viver, o andamento das obras e as histórias de quem vive esse sonho de perto.</p>
+      <div class="ig-handle rv rv-d2">
+        <span class="ig-ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg>
+        </span>
+        @ongviver
+      </div>
+      <a href="https://www.instagram.com/ongviver" target="_blank" rel="noopener" class="btn btn-dark rv rv-d3">Seguir @ongviver</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EMPRESAS / PJ ============ -->
+<section class="pj" id="empresas">
+  <div class="wrap pj-grid">
+    <div class="pj-copy">
+      <span class="kicker rv">Para empresas</span>
+      <h2 class="title rv rv-d1">Sua marca na parede de um legado.</h2>
+      <div class="rv rv-d2" style="margin-top:20px">
+        <p>Empresas que acreditam em Londrina podem ir além do tijolinho: cotas de patrocínio, reconhecimento na nova sede e o selo <strong>Construtor da Esperança</strong> para comunicar esse compromisso ao mercado.</p>
+        <p>Deixe seus dados e a equipe da Viver preparará uma proposta de parceria para a sua empresa.</p>
+      </div>
+      <ul class="pj-points rv rv-d3">
+        <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFD419" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Reconhecimento permanente na nova sede</li>
+        <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFD419" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Prestação de contas transparente e auditável</li>
+        <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFD419" stroke-width="3.2"><path d="M20 6L9 17l-5-5"/></svg></span>Impacto direto em ~300 famílias da região</li>
+      </ul>
+    </div>
+    <form class="form-card rv rv-d2" id="pjForm" novalidate>
+      <div class="form-grid">
+        <div class="field"><input id="f-nome" name="nome" type="text" placeholder=" " autocomplete="name" required /><label for="f-nome">Seu nome</label></div>
+        <div class="field"><input id="f-empresa" name="empresa" type="text" placeholder=" " autocomplete="organization" required /><label for="f-empresa">Empresa</label></div>
+        <div class="field"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" required /><label for="f-email">E-mail corporativo</label></div>
+        <div class="field"><input id="f-fone" name="fone" type="tel" placeholder=" " autocomplete="tel" /><label for="f-fone">WhatsApp</label></div>
+        <div class="field full"><textarea id="f-msg" name="msg" placeholder=" "></textarea><label for="f-msg">Como sua empresa quer participar?</label></div>
+      </div>
+      <button type="submit" class="btn btn-sun">Quero ser um Construtor da Esperança</button>
+      <p class="form-note">Seus dados vão direto para a equipe da Viver · contato@ongviver.org.br</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ QUEM É A VIVER ============ -->
+<section class="about" style="background:var(--cream)">
+  <div class="wrap about-grid" id="aboutGrid">
+    <div class="about-visual rv">
+      <div class="pgrid">
+        <figure class="pg pg-1">
+          <img src="assets/foto-criancas-1.jpg" alt="Voluntária da Viver sentada no chão brincando com duas crianças" loading="lazy" />
+          <figcaption>Cuidado que vira brincadeira</figcaption>
+        </figure>
+        <figure class="pg pg-2">
+          <img src="assets/foto-criancas-3.jpg" alt="Criança sorrindo e comemorando em uma ação da Viver" loading="lazy" />
+          <figcaption>Alegria em dia de ação</figcaption>
+        </figure>
+        <figure class="pg pg-3">
+          <img src="assets/foto-criancas-2.jpg" alt="Criança fazendo atividade de artes na brinquedoteca da Viver" loading="lazy" />
+          <figcaption>Oficinas todos os dias</figcaption>
+        </figure>
+      </div>
+      <span class="mission-chip">Missão: promover o amor.</span>
+    </div>
+    <div>
+      <span class="kicker rv">Quem é a Viver</span>
+      <h2 class="title rv rv-d1">25 anos promovendo o amor. Literalmente.</h2>
+      <div class="rv rv-d2" style="margin-top:20px">
+        <p style="margin-bottom:16px;font-size:16px;color:#4b4b48">A <strong style="color:var(--ink)">ONG Viver – Apoio à Criança e Adolescente com Câncer</strong> é uma organização sem fins lucrativos de Londrina (PR), fundada em 2001. Há 25 anos oferece atendimento <strong style="color:var(--ink)">integral e gratuito</strong> a crianças e adolescentes em tratamento oncológico e às suas famílias: assistência social, psicologia, nutrição, odontologia, apoio jurídico, alimentação, pernoite, medicamentos, cestas básicas e atividades recreativas.</p>
+        <p style="font-size:16px;color:#4b4b48">Mantida por doações, parcerias e ações da comunidade, a Viver existe para garantir que <strong style="color:var(--ink)">nenhuma família enfrente sozinha</strong> os desafios do câncer&nbsp;infantojuvenil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="kicker">Dúvidas frequentes</span>
+      <h2 class="title">Perguntas de quem já está quase pegando o tijolinho</h2>
+    </div>
+    <div class="faq-list">
+      <details class="rv">
+        <summary>Como funciona o pagamento? <span class="plus">+</span></summary>
+        <div class="ans">Você escolhe entre cartão de crédito ou PIX recorrente, em até 12 parcelas de R$&nbsp;100 (total de R$&nbsp;1.200). Simples, seguro e sem burocracia.</div>
+      </details>
+      <details class="rv rv-d1">
+        <summary>Meu nome vai mesmo aparecer na parede? <span class="plus">+</span></summary>
+        <div class="ans">Sim! Todo apoiador que adquire um tijolinho tem o nome estampado em uma das paredes da nova sede da Viver: um registro permanente de quem ajudou a construir essa história.</div>
+      </details>
+      <details class="rv rv-d2">
+        <summary>Posso comprar mais de um tijolinho? <span class="plus">+</span></summary>
+        <div class="ans">Pode, e cada tijolinho a mais acelera a conclusão da obra. Empresas e famílias podem adquirir quantos tijolinhos quiserem.</div>
+      </details>
+      <details class="rv">
+        <summary>Sou empresa (PJ). Posso participar? <span class="plus">+</span></summary>
+        <div class="ans">Sim! Além do tijolinho, empresas podem se tornar parceiras da campanha com cotas e reconhecimento especial. Preencha o formulário da seção "Para empresas" ou fale com a Viver: contato@ongviver.org.br ou (43) 3343-0044.</div>
+      </details>
+      <details class="rv rv-d1">
+        <summary>Como sei que o dinheiro está sendo bem usado? <span class="plus">+</span></summary>
+        <div class="ans">A Viver mantém prestação de contas pública e atualizada. A obra está 55% concluída, com cronograma em dia, e você pode conferir todos os valores arrecadados e investidos na apresentação oficial de prestação de contas, no link disponível nesta página.</div>
+      </details>
+      <details class="rv rv-d2">
+        <summary>A doação vale para quem mora fora de Londrina? <span class="plus">+</span></summary>
+        <div class="ans">Vale! A Viver atende famílias de 90 municípios, e o tijolinho pode ser adquirido de qualquer lugar do Brasil.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final">
+  <div class="wrap">
+    <img class="selo-big rv" src="assets/selo-construtores.png" alt="" aria-hidden="true" />
+    <h2 class="rv rv-d1">Daqui a alguns anos, uma criança vai passar por um corredor cheio de nomes.</h2>
+    <p class="rv rv-d2">Ela não vai saber quem são todas aquelas pessoas. Mas vai sentir o que elas construíram: uma casa inteira feita de cuidado. <strong>Um dos nomes naquela parede pode ser o seu.</strong></p>
+    <a href="#adquirir" class="btn btn-red rv rv-d3">Quero meu nome nessa parede</a>
+    <p class="micro rv rv-d3">Tijolinho: R$&nbsp;1.200 em até 12x de R$&nbsp;100 · Cartão ou PIX recorrente</p>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-top">
+    <div class="foot-brand">
+      <img src="assets/logo-viver-branco.png" alt="ONG Viver" />
+      <p>Apoio integral e gratuito a crianças e adolescentes com câncer, e às suas famílias. Há 25 anos garantindo que ninguém enfrente essa luta sozinho.</p>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/ongviver" target="_blank" rel="noopener" aria-label="Instagram da Viver">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://api.whatsapp.com/send?phone=5543996311861" target="_blank" rel="noopener" aria-label="WhatsApp da Viver">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 01-2-1.2 7.4 7.4 0 01-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5v-.5c0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.9 2.9 4.6 4a15 15 0 001.5.6c.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+        </a>
+        <a href="mailto:contato@ongviver.org.br" aria-label="E-mail da Viver">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 7l10 7L22 7"/></svg>
+        </a>
+        <a href="https://www.ongviver.org.br" target="_blank" rel="noopener" aria-label="Site oficial da Viver">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Navegue</h4>
+      <ul>
+        <li><a href="#historia">Nossa história</a></li>
+        <li><a href="#video">A Viver</a></li>
+        <li><a href="#obra">Andamento da obra</a></li>
+        <li><a href="#sede">A nova sede</a></li>
+        <li><a href="#empresas">Para empresas</a></li>
+        <li><a href="#faq">Dúvidas frequentes</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Fale conosco</h4>
+      <ul>
+        <li><a href="https://api.whatsapp.com/send?phone=5543996311861" target="_blank" rel="noopener">(43) 99631-1861 · WhatsApp</a></li>
+        <li><a href="tel:+554333430044">(43) 3343-0044</a></li>
+        <li><a href="mailto:contato@ongviver.org.br">contato@ongviver.org.br</a></li>
+        <li>Rua Lucilla Ballalai, 391<br />Jardim Higienópolis · Londrina/PR</li>
+      </ul>
+    </div>
+    <div class="foot-cta">
+      <h5>Falta pouco para a casa nova.</h5>
+      <p>Garanta seu tijolinho e seu nome na parede dessa história.</p>
+      <a href="#adquirir" class="btn btn-sun">Quero meu tijolinho</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center">
+      <span>© 2026 ONG Viver – Apoio à Criança e Adolescente com Câncer</span>
+      <span>Campanha <b>Construtores da Esperança</b> · De tijolinho em tijolinho, ampliamos sonhos</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING STACK ============ -->
+<div class="float-stack">
+  <a class="fab fab-mail" data-tip="contato@ongviver.org.br" href="mailto:contato@ongviver.org.br" aria-label="Enviar e-mail para a Viver">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 7l10 7L22 7"/></svg>
+  </a>
+  <a class="fab fab-ig" data-tip="@ongviver" href="https://www.instagram.com/ongviver" target="_blank" rel="noopener" aria-label="Instagram da Viver">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+  </a>
+  <a class="fab fab-wa" data-tip="Fale com a Viver no WhatsApp" href="https://api.whatsapp.com/send?phone=5543996311861&text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20tijolinho%20da%20campanha%20Construtores%20da%20Esperan%C3%A7a" target="_blank" rel="noopener" aria-label="WhatsApp da Viver">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 01-2-1.2 7.4 7.4 0 01-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5v-.5c0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.9 2.9 4.6 4a15 15 0 001.5.6c.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+  </a>
+</div>
+
+<script>
+// ---------- navbar + scroll progress ----------
+const nav = document.querySelector('.nav');
+const progress = document.querySelector('.progress');
+function onScroll(){
+  nav.classList.toggle('solid', scrollY > 40);
+  const h = document.documentElement.scrollHeight - innerHeight;
+  progress.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
+}
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+// mobile menu
+const burger = document.getElementById('burger');
+const menu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+// ---------- reveal ----------
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.14, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+// fallback: revela imediatamente o que já está no viewport (carga com âncora / deep link)
+function revealVisible(){
+  document.querySelectorAll('.rv:not(.in)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0){ el.classList.add('in'); io.unobserve(el); }
+  });
+}
+revealVisible();
+addEventListener('load', revealVisible);
+
+// ---------- counters ----------
+const fmt = n => n.toLocaleString('pt-BR');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  cio.unobserve(e.target);
+  const el = e.target, target = +el.dataset.count;
+  if (reduced){ el.textContent = fmt(target); return; }
+  const t0 = performance.now(), dur = 1400;
+  const tick = now => {
+    const p = Math.min((now - t0) / dur, 1);
+    el.textContent = fmt(Math.round(target * (1 - Math.pow(1 - p, 3))));
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}), {threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+// ---------- progress bars ----------
+const bio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  bio.unobserve(e.target);
+  e.target.querySelectorAll('.bar > i').forEach(i => i.style.width = i.dataset.w + '%');
+}), {threshold:.4});
+document.querySelectorAll('.bars').forEach(el => bio.observe(el));
+
+// ---------- VSL facade ----------
+const vsl = document.getElementById('vsl');
+function loadVSL(){
+  if (vsl.dataset.loaded) return;
+  vsl.dataset.loaded = 1;
+  vsl.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/1h99VreK99E?autoplay=1&rel=0" title="Vídeo institucional ONG Viver" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+}
+vsl.addEventListener('click', loadVSL);
+vsl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); loadVSL(); } });
+
+// ---------- paredes de tijolinhos de fundo ----------
+function setupWall(sec){
+  const wall = document.createElement('div');
+  wall.className = 'wall'; wall.setAttribute('aria-hidden','true');
+  sec.classList.add('has-wall'); sec.prepend(wall);
+  const CORES = ['#FFD419','#F7B500','#F58220','#E23B4E','#2E8FD8','#3BB25A','#F5A3B5'];
+  let bricks = [], played = false;
+  function build(){
+    wall.innerHTML = ''; bricks = [];
+    const W = sec.clientWidth, H = sec.clientHeight;
+    const small = W < 761;
+    const bw = small ? 42 : 56, bh = small ? 20 : 26, gap = 6;
+    const rows = Math.ceil(H / (bh + gap));
+    const cols = Math.ceil(W / (bw + gap)) + 2;
+    for (let r = 0; r < rows; r++){
+      const off = (r % 2) ? -(bw + gap) / 2 : 0;
+      for (let c = 0; c < cols; c++){
+        const b = document.createElement('i');
+        b.className = 'wb';
+        b.style.width = bw + 'px'; b.style.height = bh + 'px';
+        b.style.left = (off + c * (bw + gap)) + 'px';
+        b.style.bottom = (r * (bh + gap)) + 'px';
+        b.style.background = CORES[(Math.random() * CORES.length) | 0];
+        b._ord = r * 10000 + Math.random() * 9000;
+        wall.appendChild(b); bricks.push(b);
+      }
+    }
+    bricks.sort((a, b) => a._ord - b._ord);
+    if (played) show(true);
+  }
+  function show(instant){
+    played = true;
+    const DUR = 1400; // a parede inteira sobe em ~1,4s, diante dos olhos
+    bricks.forEach((b, i) => {
+      b.style.transitionDelay = instant ? '0ms' : Math.round(i / bricks.length * DUR + Math.random() * 90) + 'ms';
+      b.classList.add('on');
+    });
+  }
+  const wio = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ wio.disconnect(); show(reduced); }
+  }), {threshold:.18});
+  let rz;
+  addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(build, 250); });
+  build();
+  if (reduced) show(true); else wio.observe(sec);
+}
+['video','adquirir','faq'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) setupWall(el);
+});
+
+// ---------- tijolinhos: flor da Viver em blocos ----------
+// mapa 11 colunas — flor de 5 pétalas (0 = vazio; letra = cor do bloco)
+const FLOWER = [
+  '...........yyyyy..........',
+  '..........yyyyyyy.........',
+  '.........yyyyyyyy.........',
+  '.........yyy..yyy.........',
+  '.........yyy..yyy..yyyyy..',
+  '...yyy...yyy..yyy.yyyyyyy.',
+  '.yyyyyyyy.yyy.yyyyyyyyyyyy',
+  'yyyyyyyyyyyyyyyyyyyy...yyy',
+  'yyy...yyyyyyyyyyyy.....yyy',
+  'yyy.....yyyyyyyyyyyyyyyyyy',
+  'yyy.....yyyyyyyyyyyyyyyyy.',
+  'yyyyyyyyyyyyyyyyyyyyyyyy..',
+  '.yyyyyyyyyyyyyyyyyyyy.....',
+  '..yyyyyyyyy.yyyyyyyyyyy...',
+  '.....yyyy...yyyy...yyyyy..',
+  '....yyyy....yyyyy...yyyyy.',
+  '..yyyyy.....yyyyy.....yyy.',
+  '..yyy.......yyyyy.....yyy.',
+  '.yyy........yyyyyy....yyy.',
+  '.yyy........yy.yyy....yyy.',
+  '.yyy.......yyy..yyyyyyyyy.',
+  '.yyy.......yyy..yyyyyyyy..',
+  '.yyy.......yyy....yyyyy...',
+  '..yyy.....yyy.............',
+  '..yyyyyyyyyyy.............',
+  '...yyyyyyyyy..............',
+  '.....yyyyyy...............',
+];
+const TONS = ['b-Y','b-Y','b-Y','b-y','b-y','b-o2'];
+const grid = document.getElementById('brickGrid');
+const stage = document.getElementById('brickStage');
+let bricks = [];
+FLOWER.forEach((row, r) => {
+  row.split('').forEach((ch, c) => {
+    const cell = document.createElement('div');
+    if (ch !== '.'){
+      cell.className = 'brick ' + TONS[(Math.random() * TONS.length) | 0];
+      bricks.push(cell);
+    } else {
+      cell.style.visibility = 'hidden';
+    }
+    cell.style.gridColumn = c + 1;
+    cell.style.gridRow = r + 1;
+    grid.appendChild(cell);
+  });
+});
+function playBricks(){
+  stage.classList.remove('done');
+  bricks.forEach(b => { b.classList.remove('on'); b.style.animationDelay = ''; });
+  if (reduced){ bricks.forEach(b => b.classList.add('on')); stage.classList.add('done'); return; }
+  // ordem: de baixo pra cima, com leve aleatoriedade — como uma obra de verdade
+  const sorted = [...bricks].sort((a, b) => (+b.style.gridRow - +a.style.gridRow) || (Math.random() - .5));
+  const STEP = Math.max(2200 / sorted.length, 3);
+  sorted.forEach((b, i) => {
+    b.style.animationDelay = Math.round(i * STEP) + 'ms';
+    // força reflow p/ reiniciar animação
+    void b.offsetWidth;
+    b.classList.add('on');
+  });
+  const total = 2200 + 700;
+  clearTimeout(playBricks._t);
+  playBricks._t = setTimeout(() => stage.classList.add('done'), total);
+}
+const brio = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ playBricks(); brio.unobserve(e.target); }
+}), {threshold:.35});
+brio.observe(stage);
+document.getElementById('replayBricks').addEventListener('click', playBricks);
+
+// ---------- form PJ -> mailto ----------
+document.getElementById('pjForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.checkValidity()){ f.reportValidity(); return; }
+  const v = id => document.getElementById(id).value.trim();
+  const body = encodeURIComponent(
+    `Olá, equipe Viver!\n\nQuero ser um Construtor da Esperança (PJ).\n\n` +
+    `Nome: ${v('f-nome')}\nEmpresa: ${v('f-empresa')}\nE-mail: ${v('f-email')}\nWhatsApp: ${v('f-fone')}\n\n` +
+    `Como queremos participar:\n${v('f-msg')}`
+  );
+  location.href = `mailto:contato@ongviver.org.br?subject=${encodeURIComponent('Parceria PJ — Construtores da Esperança')}&body=${body}`;
+});
+</script>
+</body>
+</html>
