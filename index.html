@@ -301,6 +301,26 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
   background:#FFCB05 url('assets/bg-amarelo.jpg') center/cover no-repeat;
   text-align:center;overflow:hidden;
 }
+.brick-duo{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;
+  max-width:1060px;margin:52px auto 0;
+}
+.brick-duo .brick-stage{margin:0;width:auto}
+.brick-real{
+  margin:0;position:relative;border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow-lg);background:#fff;display:flex;
+}
+.brick-real img{width:100%;height:100%;object-fit:cover}
+.brick-real figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:48px 22px 18px;
+  background:linear-gradient(180deg,transparent,rgba(24,20,8,.82));
+  color:#fff;font-size:14px;font-weight:500;text-align:left;
+}
+.brick-real figcaption strong{color:var(--yellow)}
+@media (max-width:1020px){
+  .brick-duo{grid-template-columns:1fr;max-width:560px}
+  .brick-real{min-height:300px}
+}
 .brick-stage{
   position:relative;margin:52px auto 0;width:min(560px,92vw);
   background:rgba(255,255,255,.8);backdrop-filter:blur(8px);
@@ -455,14 +475,45 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .phone-caption{text-align:center;margin-top:18px;font-size:13.5px;color:var(--ink-soft);font-weight:600}
 
 /* ---------- nova sede ---------- */
-.sede-hero{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:56px}
-.sede-hero img{width:100%;height:auto;transition:transform .8s var(--ease)}
-.sede-hero:hover img{transform:scale(1.02)}
-.sede-hero .tag{
-  position:absolute;left:24px;bottom:24px;
+.carousel{position:relative;margin-bottom:56px}
+.car-track{
+  display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+}
+.car-track::-webkit-scrollbar{display:none}
+.car-slide{
+  flex:0 0 100%;scroll-snap-align:center;position:relative;margin:0;
+  aspect-ratio:16/8.4;background:#EDE8DA;
+}
+.car-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.car-slide figcaption{
+  position:absolute;left:22px;bottom:20px;
   background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
-  border-radius:999px;padding:11px 24px;font-weight:700;font-size:14px;box-shadow:var(--shadow-md);
-  display:flex;align-items:center;gap:9px;
+  border-radius:999px;padding:10px 22px;font-weight:700;font-size:13.5px;box-shadow:var(--shadow-md);
+}
+.car-btn{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:4;
+  width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.92);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-md);
+  transition:transform .2s var(--spring), background .2s;
+}
+.car-btn:hover{transform:translateY(-50%) scale(1.1);background:#fff}
+.car-prev{left:16px}
+.car-next{right:16px}
+.car-dots{display:flex;justify-content:center;gap:9px;margin-top:20px}
+.car-dot{
+  width:10px;height:10px;border-radius:999px;border:0;cursor:pointer;
+  background:#E3D9BC;transition:width .3s var(--ease), background .3s;padding:0;
+}
+.car-dot.on{width:30px;background:var(--yellow-deep)}
+@media (max-width:760px){
+  .car-slide{aspect-ratio:4/3.4}
+  .car-slide figcaption{left:12px;bottom:12px;font-size:11.5px;padding:8px 15px}
+  .car-btn{width:40px;height:40px}
+  .car-prev{left:8px}.car-next{right:8px}
 }
 .features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .feature{
@@ -907,7 +958,7 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
         <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.14v14l11-7-11-7z"/></svg>
       </span>
     </div>
-    <p class="vsl-caption">Vídeo oficial da campanha Construtores da Esperança · ONG Viver</p>
+    <p class="vsl-caption">Vídeo institucional da Viver.</p>
   </div>
 </section>
 
@@ -918,6 +969,11 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
       <span class="kicker" style="color:var(--red-deep)">Cada gesto constrói</span>
       <h2 class="title">É assim que um sonho fica de pé: um tijolinho de cada vez.</h2>
     </div>
+    <div class="brick-duo">
+    <figure class="brick-real rv rv-d2">
+      <img src="assets/render-parede-nomes.jpg" alt="Perspectiva do corredor da nova sede com a parede de tijolinhos coloridos, cada um com o nome de um apoiador, e a flor da Viver ao centro" loading="lazy" />
+      <figcaption>Assim vai ficar na nova sede: cada tijolinho com um nome. <strong>O seu pode estar aqui.</strong></figcaption>
+    </figure>
     <div class="brick-stage rv rv-d1" id="brickStage">
       <button class="replay" id="replayBricks" aria-label="Repetir animação dos tijolinhos">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12a9 9 0 109-9"/><path d="M3 4v5h5"/></svg>
@@ -925,6 +981,7 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
       <div class="brick-grid" id="brickGrid" aria-hidden="true"></div>
       <img class="brick-logo" src="assets/logo-viver.png" alt="Logo da ONG Viver" />
       <p class="brick-caption">A flor da Viver, construída de tijolinho em tijolinho. Igual à nova sede.</p>
+    </div>
     </div>
     <a href="#adquirir" class="btn btn-red rv rv-d2">Colocar meu tijolinho nessa história</a>
   </div>
@@ -946,7 +1003,7 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
           <span class="b-ico" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F7B500" stroke-width="2"><rect x="3" y="10" width="18" height="11" rx="1.5"/><path d="M3 15h18M8.5 10v11M15.5 10v5"/><path d="M5 10V6a2 2 0 012-2h10a2 2 0 012 2v4"/></svg>
           </span>
-          <div><h3>Constrói espaço</h3><p>40 leitos de pernoite, brinquedoteca, refeitório ampliado e consultório odontológico.</p></div>
+          <div><h3>Constrói espaço</h3><p>40 leitos de pernoite, brinquedoteca, mini-quadra, salas de atividades, cozinha-escola, refeitório ampliado, salas individuais de atendimento, consultório odontológico e muito mais.</p></div>
         </div>
         <div class="benefit rv rv-d1">
           <span class="b-ico" aria-hidden="true">
@@ -995,7 +1052,7 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
         <div class="bar-item rv rv-d1">
           <div class="bar-top"><span class="bar-lbl">Obra física</span><span class="bar-val">55%</span></div>
           <div class="bar"><i data-w="55"></i></div>
-          <p class="bar-sub">Cronograma em dia, com a estrutura do 2º pavimento em execução</p>
+          <p class="bar-sub">Cronograma em dia, com a estrutura do 3º pavimento em execução</p>
         </div>
         <div class="bar-item rv rv-d2">
           <div class="bar-top"><span class="bar-lbl">Meta financeira</span><span class="bar-val">R$&nbsp;4,26 mi de R$&nbsp;8,5 mi</span></div>
@@ -1010,6 +1067,11 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
         <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Estrutura do 1º pavimento</span>
         <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Primeira laje</span>
         <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Estrutura do 2º pavimento</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Segunda laje</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Estrutura do 3º pavimento</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Reboco</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Infraestrutura hidráulica</span>
+        <span class="fase"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Infraestrutura elétrica</span>
       </div>
       <a class="obra-link rv rv-d3" href="https://canva.link/yzkfp3ml9r7kooa" target="_blank" rel="noopener">
         Ver prestação de contas completa
@@ -1037,12 +1099,29 @@ footer h4{color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase
       <h2 class="title">Uma casa 3x maior.<br />Um cuidado sem limites.</h2>
       <p class="lead">Mais de 1.000&nbsp;m², em 3&nbsp;andares, para cerca de 300&nbsp;famílias atendidas.</p>
     </div>
-    <div class="sede-hero rv rv-d1">
-      <img src="assets/render-sede.jpg" alt="Projeto arquitetônico da nova sede da ONG Viver: fachada com tijolos aparentes, janelas redondas coloridas e a flor da Viver no jardim" loading="lazy" />
-      <span class="tag">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F7B500" stroke-width="2.4" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v6a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h11"/></svg>
-        Projeto arquitetônico aprovado
-      </span>
+    <div class="carousel rv rv-d1" id="sedeCarousel" aria-label="Perspectivas do projeto da nova sede">
+      <div class="car-track" id="carTrack" tabindex="0">
+        <figure class="car-slide"><img src="assets/render-sede.jpg" alt="Fachada ilustrada da nova sede da Viver, com tijolos aparentes e janelas redondas coloridas" /><figcaption>Projeto arquitetônico aprovado</figcaption></figure>
+        <figure class="car-slide"><img src="assets/amp-fachada.jpg" alt="Perspectiva realista da fachada da nova sede da Viver" loading="lazy" /><figcaption>A nova fachada</figcaption></figure>
+        <figure class="car-slide"><img src="assets/amp-brinquedoteca.jpg" alt="Perspectiva da brinquedoteca, com escorregador e árvore lúdica" loading="lazy" /><figcaption>Brinquedoteca</figcaption></figure>
+        <figure class="car-slide"><img src="assets/amp-atividades.jpg" alt="Perspectiva da sala de atividades com teto estrelado" loading="lazy" /><figcaption>Salas de atividades</figcaption></figure>
+        <figure class="car-slide"><img src="assets/amp-refeitorio.jpg" alt="Perspectiva do refeitório ampliado" loading="lazy" /><figcaption>Refeitório ampliado</figcaption></figure>
+        <figure class="car-slide"><img src="assets/amp-alojamento.jpg" alt="Perspectiva do alojamento com beliches para pernoite" loading="lazy" /><figcaption>Alojamento: 40 leitos de pernoite</figcaption></figure>
+        <figure class="car-slide"><img src="assets/render-parede-nomes.jpg" alt="Corredor com a parede de tijolinhos com nomes dos apoiadores" loading="lazy" /><figcaption>A parede dos construtores. Seu nome aqui.</figcaption></figure>
+      </div>
+      <button class="car-btn car-prev" id="carPrev" aria-label="Imagem anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="car-btn car-next" id="carNext" aria-label="Próxima imagem">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <div class="car-dots" id="carDots" role="tablist" aria-label="Selecionar imagem"></div>
+    </div>
+    <div class="rv rv-d2" style="text-align:center;margin:-18px 0 56px">
+      <a href="maquete.html" class="btn btn-dark">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
+        Explorar a maquete 3D interativa
+      </a>
     </div>
     <div class="features">
       <div class="feature rv">
@@ -1493,6 +1572,46 @@ const brio = new IntersectionObserver(es => es.forEach(e => {
 }), {threshold:.35});
 brio.observe(stage);
 document.getElementById('replayBricks').addEventListener('click', playBricks);
+
+// ---------- carrossel da nova sede ----------
+(function(){
+  const track = document.getElementById('carTrack');
+  if (!track) return;
+  const slides = [...track.children];
+  const dotsBox = document.getElementById('carDots');
+  let idx = 0, timer;
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'car-dot' + (i === 0 ? ' on' : '');
+    d.setAttribute('aria-label', 'Ir para imagem ' + (i + 1));
+    d.addEventListener('click', () => { go(i); restart(); });
+    dotsBox.appendChild(d);
+  });
+  const dots = [...dotsBox.children];
+  function go(i){
+    idx = (i + slides.length) % slides.length;
+    track.scrollTo({left: idx * track.clientWidth, behavior: reduced ? 'auto' : 'smooth'});
+  }
+  function syncDots(){
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    if (i !== idx && i >= 0 && i < slides.length) idx = i;
+    dots.forEach((d, k) => d.classList.toggle('on', k === idx));
+  }
+  track.addEventListener('scroll', () => requestAnimationFrame(syncDots), {passive:true});
+  document.getElementById('carPrev').addEventListener('click', () => { go(idx - 1); restart(); });
+  document.getElementById('carNext').addEventListener('click', () => { go(idx + 1); restart(); });
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft'){ e.preventDefault(); go(idx - 1); restart(); }
+    if (e.key === 'ArrowRight'){ e.preventDefault(); go(idx + 1); restart(); }
+  });
+  function restart(){
+    clearInterval(timer);
+    if (!reduced) timer = setInterval(() => go(idx + 1), 5000);
+  }
+  ['pointerenter','touchstart','focusin'].forEach(ev => track.addEventListener(ev, () => clearInterval(timer), {passive:true}));
+  ['pointerleave','focusout'].forEach(ev => track.addEventListener(ev, restart));
+  restart();
+})();
 
 // ---------- form PJ -> mailto ----------
 document.getElementById('pjForm').addEventListener('submit', e => {

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maquete Interativa — Nova Sede ONG Viver</title>
+<meta name="description" content="Explore em 3D o projeto da nova sede da ONG Viver: gire, aproxime e conheça cada ambiente da casa que estamos construindo de tijolinho em tijolinho." />
+<link rel="icon" type="image/png" href="assets/flor-viver.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fauna+One&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --yellow:#FFD419; --yellow-deep:#F7B500; --orange:#F58220; --orange-deep:#E86A00;
+  --red:#E23B4E; --red-deep:#C92B3D; --ink:#2E2E2C; --ink-soft:#6E6E6A; --cream:#FFFBEE;
+  --shadow-md:0 12px 34px rgba(46,46,44,.13); --shadow-lg:0 30px 70px rgba(46,46,44,.2);
+  --spring:cubic-bezier(.34,1.56,.64,1); --ease:cubic-bezier(.22,.8,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);
+  background:linear-gradient(180deg,#FFF6D6 0%,#FFFBEE 45%,#FFF3C4 100%);
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+}
+#scene{position:fixed;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+#scene:active{cursor:grabbing}
+
+/* ---------- topo ---------- */
+.top{
+  position:fixed;top:0;left:0;right:0;z-index:10;
+  display:flex;align-items:center;gap:14px;padding:14px 20px;
+  pointer-events:none;
+}
+.top > *{pointer-events:auto}
+.back{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-radius:999px;padding:10px 18px;font-weight:700;font-size:13px;color:var(--ink);
+  text-decoration:none;box-shadow:var(--shadow-md);
+  transition:transform .2s var(--spring);
+}
+.back:hover{transform:translateX(-3px)}
+.title-chip{
+  margin-left:auto;display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-radius:999px;padding:8px 20px 8px 10px;box-shadow:var(--shadow-md);
+}
+.title-chip img{height:28px}
+.title-chip b{font-family:'Fauna One',serif;font-weight:400;font-size:14px;white-space:nowrap}
+
+/* ---------- hint ---------- */
+.hint{
+  position:fixed;top:72px;left:50%;transform:translateX(-50%);z-index:9;
+  background:rgba(46,46,44,.85);color:#fff;backdrop-filter:blur(8px);
+  border-radius:999px;padding:9px 20px;font-size:12.5px;font-weight:600;
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+  opacity:1;transition:opacity .6s;pointer-events:none;
+}
+.hint.off{opacity:0}
+
+/* ---------- seletor de pavimentos ---------- */
+.floors{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:10;
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border-radius:999px;padding:8px;box-shadow:var(--shadow-lg);
+  max-width:calc(100vw - 24px);
+}
+.fbtn{
+  border:0;cursor:pointer;border-radius:999px;padding:10px 18px;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--ink);
+  background:transparent;transition:background .25s,color .25s,transform .2s var(--spring);
+  white-space:nowrap;
+}
+.fbtn:hover{background:#FFF3C4}
+.fbtn.on{background:linear-gradient(180deg,var(--yellow),var(--yellow-deep));box-shadow:inset 0 2px 0 rgba(255,255,255,.5)}
+.fbtn:active{transform:scale(.94)}
+
+/* ---------- card do ambiente ---------- */
+.room-card{
+  position:fixed;left:18px;bottom:84px;z-index:10;max-width:320px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+  border-radius:20px;padding:18px 22px;box-shadow:var(--shadow-lg);
+  border-left:5px solid var(--yellow);
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .3s var(--ease),transform .3s var(--spring);
+}
+.room-card.on{opacity:1;transform:none}
+.room-card .rc-floor{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep)}
+.room-card h2{font-family:'Fauna One',serif;font-weight:400;font-size:19px;margin:3px 0 4px}
+.room-card p{font-size:13px;color:var(--ink-soft);line-height:1.55}
+
+/* ---------- tooltip hover ---------- */
+.tip{
+  position:fixed;z-index:11;pointer-events:none;
+  background:var(--ink);color:#fff;font-size:12px;font-weight:700;
+  border-radius:9px;padding:6px 12px;opacity:0;transform:translate(-50%,-140%);
+  transition:opacity .15s;white-space:nowrap;
+}
+
+/* ---------- CTA ---------- */
+.cta{
+  position:fixed;right:18px;bottom:84px;z-index:10;
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(180deg,#F0596B,var(--red-deep));color:#fff;
+  border-radius:999px;padding:13px 22px;font-weight:700;font-size:13.5px;text-decoration:none;
+  box-shadow:0 12px 28px rgba(201,43,61,.4), inset 0 2px 0 rgba(255,255,255,.25);
+  transition:transform .2s var(--spring);
+}
+.cta:hover{transform:translateY(-3px)}
+
+.loading{
+  position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:linear-gradient(180deg,#FFF6D6,#FFF3C4);transition:opacity .5s;
+}
+.loading.off{opacity:0;pointer-events:none}
+.loading img{width:72px;animation:pulse 1.2s ease-in-out infinite alternate}
+@keyframes pulse{from{transform:scale(.92);opacity:.7}to{transform:scale(1.06);opacity:1}}
+.loading span{font-weight:700;font-size:13px;color:var(--ink-soft)}
+
+@media (max-width:760px){
+  .title-chip b{display:none}
+  .hint{top:64px;font-size:11px;padding:8px 14px}
+  .fbtn{padding:9px 13px;font-size:12px}
+  .room-card{left:12px;right:12px;max-width:none;bottom:76px;padding:14px 18px}
+  .cta{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="loading" id="loading">
+  <img src="assets/flor-viver.png" alt="" />
+  <span>Construindo a maquete, tijolinho por tijolinho…</span>
+</div>
+
+<canvas id="scene"></canvas>
+
+<header class="top">
+  <a class="back" href="index.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M15 6l-6 6 6 6"/></svg>
+    Voltar ao site
+  </a>
+  <span class="title-chip">
+    <img src="assets/logo-viver.png" alt="ONG Viver" />
+    <b>Maquete interativa · Nova sede</b>
+  </span>
+</header>
+
+<div class="hint" id="hint">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4"/></svg>
+  Arraste para girar · Pinça ou scroll para zoom · Toque nos ambientes
+</div>
+
+<div class="room-card" id="roomCard">
+  <div class="rc-floor" id="rcFloor"></div>
+  <h2 id="rcName"></h2>
+  <p id="rcDesc"></p>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<a class="cta" href="index.html#adquirir">🧱 Quero meu tijolinho</a>
+
+<nav class="floors" aria-label="Pavimentos">
+  <button class="fbtn on" data-floor="all">Prédio completo</button>
+  <button class="fbtn" data-floor="-1">Pav. inferior</button>
+  <button class="fbtn" data-floor="0">Térreo</button>
+  <button class="fbtn" data-floor="1">1º pavimento</button>
+  <button class="fbtn" data-floor="2">2º pavimento</button>
+</nav>
+
+<script type="importmap">
+{"imports":{
+  "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ============================================================
+   Maquete estilizada da nova sede da ONG Viver
+   Baseada no projeto arquitetônico aprovado (sem escala exata)
+   ============================================================ */
+
+const C = {
+  cream:0xFFFBEE, slab:0xF2EBD8, slabSide:0xE4D9BC,
+  yellow:0xFFD419, yellowDeep:0xF7B500, orange:0xF58220,
+  red:0xE87A8B, blue:0x7FB8E8, green:0x8FD19E, pink:0xF5B8C4,
+  lilac:0xC9B8E8, sand:0xF0E3C0, grey:0xBFBAB0, ink:0x3C3C3B,
+  brick:0xC98B6B, white:0xFAF7EF, glass:0xBFE3F0,
+};
+
+// Ambientes por pavimento: [nome, x, z, w, d, cor, descrição]
+const H = 2.6, SLAB = .45, GAP = .14, LVL = H + SLAB + .25;
+const FLOORS = {
+  '-1': {
+    label:'Pavimento inferior', y:-LVL,
+    rooms:[
+      ['Recebimento de doações', 0,8, 7,6, C.orange, 'Onde chegam as doações de alimentos e mantimentos, direto do acesso de carga.'],
+      ['Depósito de mantimentos', 0,0, 7,7.4, C.sand, 'Estoque organizado de alimentos que abastece as famílias o ano todo.'],
+      ['Confecção de cestas básicas', 7.6,0, 6.4,7.4, C.green, 'Aqui nascem as cerca de 1.500 cestas básicas entregues por ano.'],
+      ['Arquivo', 7.6,8, 6.4,6, C.lilac, 'Guarda a história e os documentos da instituição.'],
+      ['Estacionamento interno', 15,0, 19,14, C.grey, 'Vagas cobertas e área de manobra, com acesso pela Rua Ataúlfo de Paiva.'],
+    ]
+  },
+  '0': {
+    label:'Térreo', y:0,
+    rooms:[
+      ['Recepção e acolhimento', 0,0, 5.4,6.4, C.yellow, 'A porta de entrada: onde cada família é recebida pelo nome.'],
+      ['Capela', 0,7, 4.2,4.6, C.lilac, 'Acolhimento também para a alma, de todas as fés.'],
+      ['Sala de TV', 4.6,7, 3.8,4.6, C.blue, 'Descanso e distração para as crianças e seus acompanhantes.'],
+      ['Brinquedoteca', 5.8,0, 7,6.4, C.pink, 'Porque criança precisa continuar sendo criança, mesmo no tratamento.'],
+      ['Sala de música e livros', 13.2,0, 5.6,6.4, C.green, 'Espaço para imaginar, ler, tocar e criar.'],
+      ['Oficina', 9,7, 5,4.6, C.orange, 'Atividades e oficinas para as crianças e adolescentes.'],
+      ['Refeitório', 14.4,7.2, 7.2,6.8, C.yellowDeep, 'Mais de 16 mil refeições servidas por ano, agora com muito mais espaço.'],
+      ['Cozinha e cocção', 22,7.2, 6.6,6.8, C.red, 'Cozinha profissional e cozinha-escola: alimento e aprendizado juntos.'],
+      ['Mini-quadra', 19.2,0, 5.4,6.4, C.blue, 'Esporte, movimento e alegria no processo de recuperação.'],
+      ['Sala de artesanato', 25,0, 5.4,6.4, C.pink, 'Onde voluntárias produzem o artesanato que ajuda a manter a Viver.'],
+      ['Circulação e acessos', 29,7.2, 5,6.8, C.sand, 'Hall, escadas e elevador: acessibilidade completa entre os andares.'],
+    ]
+  },
+  '1': {
+    label:'1º pavimento', y:LVL,
+    rooms:[
+      ['Consultório odontológico', 0,0, 4.6,5, C.blue, 'Cuidado odontológico completo durante todo o tratamento.'],
+      ['Serviço social', 5,0, 4.2,5, C.green, 'Mais de 1.300 atendimentos sociais por ano.'],
+      ['Nutricionista', 9.6,0, 4.2,5, C.yellowDeep, 'Acompanhamento nutricional essencial para a recuperação.'],
+      ['Psicologia', 14.2,0, 4.2,5, C.lilac, 'Mais de 900 atendimentos psicológicos por ano, para crianças e famílias.'],
+      ['Administrativo e reuniões', 0,5.6, 8,3.6, C.sand, 'A equipe que faz a Viver funcionar todos os dias.'],
+      ['Telemarketing · RH · Financeiro', 18.8,0, 6.8,5, C.orange, 'O coração da captação e da gestão transparente.'],
+      ['Alojamento · 40 leitos', 0,9.8, 14,4.2, C.red, 'Dormitórios para famílias que vêm de longe: ninguém fica sem onde dormir.'],
+      ['Quartos de pernoite', 14.6,9.8, 8.4,4.2, C.pink, 'Quartos com beliches e banheiros para os dias de tratamento.'],
+      ['Copa das famílias', 23.6,9.8, 4,4.2, C.green, 'Um cantinho de apoio para quem está hospedado.'],
+      ['Almoxarifado de campanhas', 29,5, 5,8.8, C.grey, 'Guarda os materiais das campanhas, como a do tijolinho.'],
+    ]
+  },
+  '2': {
+    label:'2º pavimento', y:LVL*2,
+    rooms:[
+      ['Salão multiuso', 0,0, 28.6,14, C.yellow, 'Um grande espaço para eventos, festas, formações e encontros da comunidade Viver.'],
+      ['Caixa d’água e técnica', 29,4, 5,6, C.grey, 'Infraestrutura que mantém a casa toda funcionando.'],
+    ]
+  },
+};
+
+const BW = 34, BD = 14; // footprint do prédio
+
+// ---------- cena ----------
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0xFFF3C4, 120, 240);
+
+const camera = new THREE.PerspectiveCamera(42, 1, .1, 500);
+camera.position.set(62, 44, 66);
+
+const controls = new OrbitControls(camera, canvas);
+controls.target.set(BW/2 + 2, 2.5, BD/2);
+controls.enableDamping = true;
+controls.dampingFactor = .07;
+controls.minDistance = 18;
+controls.maxDistance = 110;
+controls.maxPolarAngle = Math.PI * .49;
+controls.autoRotate = true;
+controls.autoRotateSpeed = .7;
+
+// luzes
+scene.add(new THREE.HemisphereLight(0xFFFBEE, 0xD8C890, 1.05));
+const sun = new THREE.DirectionalLight(0xFFF4D6, 2.1);
+sun.position.set(35, 55, 20);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.left = -45; sun.shadow.camera.right = 60;
+sun.shadow.camera.top = 45; sun.shadow.camera.bottom = -35;
+sun.shadow.bias = -0.0004;
+scene.add(sun);
+
+// chão
+const ground = new THREE.Mesh(
+  new THREE.CylinderGeometry(78, 78, 1.6, 64),
+  new THREE.MeshStandardMaterial({color:0xF3EAD0, roughness:1})
+);
+ground.position.set(BW/2, -LVL - 1.3, BD/2);
+ground.receiveShadow = true;
+scene.add(ground);
+
+// ruas estilizadas
+function road(x, z, w, d){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, .3, d),
+    new THREE.MeshStandardMaterial({color:0xCFC9BA, roughness:1}));
+  m.position.set(x, -LVL - .45, z); m.receiveShadow = true; scene.add(m);
+}
+road(-8, BD/2, 6, 110);      // Rua Lucila Ballalai (frente)
+road(68, BD/2, 6, 110);      // Rua Ataúlfo de Paiva (fundos)
+
+// árvores fofas
+const treeMat = new THREE.MeshStandardMaterial({color:0x8FBF7F, roughness:.9});
+const trunkMat = new THREE.MeshStandardMaterial({color:0x9C7A55, roughness:1});
+function tree(x, z, s=1){
+  const g = new THREE.Group();
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(.22*s,.3*s,1.6*s,8), trunkMat);
+  t.position.y = .8*s; t.castShadow = true;
+  const f = new THREE.Mesh(new THREE.IcosahedronGeometry(1.5*s, 1), treeMat);
+  f.position.y = 2.4*s; f.castShadow = true;
+  g.add(t, f); g.position.set(x, -LVL - .3, z); scene.add(g);
+}
+[[-3,-6],[-3,22],[-3,34,.8],[40,-5,.9],[52,20],[60,-4,.8],[36,34,.9],[-14,8,.9],[70,30,.85]].forEach(a=>tree(...a));
+
+// ---------- prédio ----------
+const roomGeoCache = {};
+const pickables = [];
+const floorGroups = {};
+const edgesMat = new THREE.LineBasicMaterial({color:0xFFFFFF, transparent:true, opacity:.35});
+
+function makeRoom(def, baseY, floorKey){
+  const [name, x, z, w, d, color, desc] = def;
+  const key = w + 'x' + d;
+  roomGeoCache[key] ??= new THREE.BoxGeometry(w - GAP*2, H, d - GAP*2);
+  const mat = new THREE.MeshStandardMaterial({color, roughness:.85, metalness:0, transparent:true});
+  const m = new THREE.Mesh(roomGeoCache[key], mat);
+  m.position.set(x + w/2, baseY + SLAB + H/2, z + d/2);
+  m.castShadow = true; m.receiveShadow = true;
+  m.userData = {name, desc, floorKey, baseColor:color};
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(roomGeoCache[key]), edgesMat.clone());
+  m.add(edges);
+  pickables.push(m);
+  return m;
+}
+
+function makeSlab(y, w = BW, d = BD, x = 0, z = 0){
+  const g = new THREE.Mesh(new THREE.BoxGeometry(w + 1, SLAB, d + 1),
+    new THREE.MeshStandardMaterial({color:C.slab, roughness:.95, transparent:true}));
+  g.position.set(x + w/2, y + SLAB/2, z + d/2);
+  g.castShadow = true; g.receiveShadow = true;
+  return g;
+}
+
+for (const [key, f] of Object.entries(FLOORS)){
+  const grp = new THREE.Group();
+  grp.add(makeSlab(f.y));
+  f.rooms.forEach(r => grp.add(makeRoom(r, f.y, key)));
+  grp.userData.baseY = f.y;
+  floorGroups[key] = grp;
+  scene.add(grp);
+}
+
+// fachada frontal decorativa (faixa amarela + rosáceas) no térreo
+const facade = new THREE.Group();
+const band = new THREE.Mesh(new THREE.BoxGeometry(.5, 1.1, BD + 1.6),
+  new THREE.MeshStandardMaterial({color:C.yellowDeep, roughness:.6}));
+band.position.set(-.55, SLAB + H + .2, BD/2); band.castShadow = true;
+facade.add(band);
+const rosCols = [0xE23B4E,0x2E8FD8,0x3BB25A,0xF7B500,0xF58220,0xC9B8E8];
+[4.2, 8.2].forEach((z, ri) => {
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.05, .17, 10, 28),
+    new THREE.MeshStandardMaterial({color:C.white, roughness:.5}));
+  ring.rotation.y = Math.PI/2;
+  ring.position.set(-.45, LVL + SLAB + 1.6, z);
+  facade.add(ring);
+  for(let i = 0; i < 6; i++){
+    const seg = new THREE.Mesh(new THREE.CircleGeometry(.82, 6, i * Math.PI/3, Math.PI/3),
+      new THREE.MeshStandardMaterial({color:rosCols[(i + ri) % 6], side:THREE.DoubleSide, roughness:.6}));
+    seg.rotation.y = -Math.PI/2;
+    seg.position.set(-.46, LVL + SLAB + 1.6, z);
+    facade.add(seg);
+  }
+});
+floorGroups['1'].add(facade);
+
+// flor da Viver no jardim frontal (como no render)
+function flower(x, z, s=1){
+  const g = new THREE.Group();
+  const stemM = new THREE.MeshStandardMaterial({color:C.yellowDeep, roughness:.5});
+  for(let i = 0; i < 5; i++){
+    const p = new THREE.Mesh(new THREE.TorusGeometry(.6*s, .14*s, 8, 20), stemM);
+    const a = i * (Math.PI*2/5) - Math.PI/2;
+    p.position.set(Math.cos(a)*.78*s, 1.9*s + Math.sin(a)*.78*s, 0);
+    p.rotation.x = 0; p.rotation.y = 0; p.rotation.z = a;
+    p.castShadow = true;
+    g.add(p);
+  }
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(.09*s,.09*s,1.4*s,8), stemM);
+  stem.position.y = .7*s; stem.castShadow = true;
+  g.add(stem);
+  g.position.set(x, -0.05, z); g.rotation.y = Math.PI/2;
+  scene.add(g);
+}
+flower(-4.5, BD/2, 1.15);
+
+// letreiro "viver" (bloco amarelo com flor) no topo frontal
+const sign = new THREE.Mesh(new THREE.BoxGeometry(.4, 1.5, 5),
+  new THREE.MeshStandardMaterial({color:C.yellow, roughness:.5}));
+sign.position.set(.2, LVL*2 + SLAB + H - .4, BD/2);
+sign.castShadow = true;
+floorGroups['2'].add(sign);
+
+// estacionamento externo (térreo, aos fundos) com carrinhos
+const lot = new THREE.Group();
+const lotFloor = new THREE.Mesh(new THREE.BoxGeometry(26, .35, BD + 1),
+  new THREE.MeshStandardMaterial({color:0xD9D3C4, roughness:1, transparent:true}));
+lotFloor.position.set(BW + 13.5, .18, BD/2);
+lotFloor.receiveShadow = true;
+lotFloor.userData = {name:'Estacionamento', desc:'Vagas para famílias, voluntários e visitantes, com acesso pela Rua Ataúlfo de Paiva.', floorKey:'0', baseColor:0xD9D3C4};
+pickables.push(lotFloor);
+lot.add(lotFloor);
+const carCols = [0xE8E4DA, 0xBFD8E8, 0xF5CDA0, 0xD8C8E8, 0xC8E0C0];
+for(let i = 0; i < 7; i++){
+  const car = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(1.7, .55, 3.4),
+    new THREE.MeshStandardMaterial({color:carCols[i % 5], roughness:.4}));
+  body.position.y = .75; body.castShadow = true;
+  const cab = new THREE.Mesh(new THREE.BoxGeometry(1.5, .5, 1.7),
+    new THREE.MeshStandardMaterial({color:0xFFFFFF, roughness:.3}));
+  cab.position.set(0, 1.25, -.2); cab.castShadow = true;
+  car.add(body, cab);
+  car.position.set(BW + 4 + i * 3.4, .1, 3.2);
+  lot.add(car);
+}
+floorGroups['0'].add(lot);
+
+// ---------- interação ----------
+const ray = new THREE.Raycaster();
+const ptr = new THREE.Vector2();
+const tip = document.getElementById('tip');
+const card = document.getElementById('roomCard');
+let hovered = null, selected = null, currentFloor = 'all';
+
+function setEmissive(mesh, on){
+  mesh.material.emissive = new THREE.Color(on ? 0x6b5a00 : 0x000000);
+  mesh.material.emissiveIntensity = on ? .55 : 0;
+}
+
+function pick(e){
+  const r = canvas.getBoundingClientRect();
+  ptr.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+  ptr.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+  ray.setFromCamera(ptr, camera);
+  const hits = ray.intersectObjects(pickables, false)
+    .filter(h => h.object.material.opacity > .5);
+  return hits[0]?.object || null;
+}
+
+canvas.addEventListener('pointermove', e => {
+  if (e.pointerType === 'touch') return;
+  const m = pick(e);
+  if (m !== hovered){
+    if (hovered && hovered !== selected) setEmissive(hovered, false);
+    hovered = m;
+    if (m){ setEmissive(m, true); canvas.style.cursor = 'pointer'; }
+    else canvas.style.cursor = 'grab';
+  }
+  if (m){
+    tip.textContent = m.userData.name;
+    tip.style.left = e.clientX + 'px';
+    tip.style.top = e.clientY + 'px';
+    tip.style.opacity = 1;
+  } else tip.style.opacity = 0;
+});
+
+let downAt = null;
+canvas.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; stopAuto(); });
+canvas.addEventListener('pointerup', e => {
+  if (!downAt) return;
+  const moved = Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]);
+  downAt = null;
+  if (moved > 7) return;
+  const m = pick(e);
+  if (selected) setEmissive(selected, false);
+  selected = m;
+  if (m){
+    setEmissive(m, true);
+    document.getElementById('rcFloor').textContent = FLOORS[m.userData.floorKey]?.label || 'Térreo';
+    document.getElementById('rcName').textContent = m.userData.name;
+    document.getElementById('rcDesc').textContent = m.userData.desc;
+    card.classList.add('on');
+  } else card.classList.remove('on');
+});
+
+function stopAuto(){
+  controls.autoRotate = false;
+  document.getElementById('hint').classList.add('off');
+}
+canvas.addEventListener('wheel', stopAuto, {passive:true});
+
+// ---------- pavimentos ----------
+const FADE = {}; // alvo de opacidade/offset por andar
+function setFloor(key){
+  currentFloor = key;
+  document.querySelectorAll('.fbtn').forEach(b =>
+    b.classList.toggle('on', b.dataset.floor === key));
+  const order = ['-1','0','1','2'];
+  for (const k of order){
+    const iK = order.indexOf(k), iS = order.indexOf(key);
+    let op = 1, lift = 0;
+    if (key !== 'all'){
+      if (k === key) op = 1;
+      else if (iK > iS){ op = .1; lift = 7 + (iK - iS) * 2.5; }
+      else op = .32;
+    }
+    FADE[k] = {op, lift};
+  }
+  card.classList.remove('on');
+  if (selected){ setEmissive(selected, false); selected = null; }
+}
+document.querySelectorAll('.fbtn').forEach(b =>
+  b.addEventListener('click', () => { setFloor(b.dataset.floor); stopAuto(); }));
+setFloor('all');
+
+// ---------- loop ----------
+function resize(){
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), .05);
+  for (const [k, grp] of Object.entries(floorGroups)){
+    const f = FADE[k]; if (!f) continue;
+    const targetY = grp.userData.baseY * 0 + f.lift; // offset do grupo
+    grp.position.y += (targetY - grp.position.y) * Math.min(1, dt * 6);
+    grp.traverse(o => {
+      if (o.material && 'opacity' in o.material){
+        o.material.opacity += (f.op - o.material.opacity) * Math.min(1, dt * 6);
+        o.material.transparent = true;
+        o.castShadow = f.op > .6;
+      }
+    });
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+document.getElementById('loading').classList.add('off');
+setTimeout(() => document.getElementById('hint')?.classList.add('off'), 9000);
+</script>
+</body>
+</html>
