@@ -204,20 +204,23 @@ const FLOORS = {
     ['Circulação e acessos', 29,7.2, 5,6.8, C.sand, 'Hall, escada e elevador: acessibilidade total entre os quatro níveis.', 'stairs'],
   ]},
   '1': { label:'1º pavimento', y:LVL, rooms:[
+    // ala da frente (clínica e administrativa)
     ['Consultório odontológico', 0,0, 4.6,5, C.blue, 'Cuidado odontológico completo durante todo o tratamento.', 'dental'],
     ['Serviço social', 5,0, 4.2,5, C.green, 'Mais de 1.300 atendimentos sociais por ano.', 'office'],
     ['Nutricionista', 9.6,0, 4.2,5, C.yellowDeep, 'Acompanhamento nutricional essencial para a recuperação.', 'office'],
     ['Psicologia', 14.2,0, 4.2,5, C.lilac, 'Mais de 900 atendimentos psicológicos por ano, para crianças e famílias.', 'office'],
-    ['Administrativo e reuniões', 0,5.6, 8,3.6, C.sand, 'A equipe que faz a Viver funcionar todos os dias.', 'admin'],
-    ['Telemarketing · RH · Financeiro', 18.8,0, 6.8,5, C.orange, 'O coração da captação e da gestão transparente.', 'admin'],
+    ['Telemarketing · RH · Financeiro', 18.8,0, 4.8,5, C.orange, 'O coração da captação e da gestão transparente.', 'admin'],
+    ['Administrativo e reuniões', 24,0, 4.6,5, C.sand, 'A equipe que faz a Viver funcionar todos os dias.', 'admin'],
+    ['Espera e convivência', 0,5.3, 28.6,2.1, C.sand, 'Circulação com vista para o vão central do térreo, iluminado pela claraboia.', null],
+    ['Almoxarifado de campanhas', 29,5, 5,8.8, C.grey, 'Guarda os materiais das campanhas, como a do tijolinho.', 'shelves'],
+    // ala dos fundos (hospedagem) — bloco separado, mais baixo
     ['Alojamento · 40 leitos', 0,9.8, 14,4.2, C.red, 'Dormitórios para famílias que vêm de longe: ninguém fica sem onde dormir.', 'dorm'],
     ['Quartos de pernoite', 14.6,9.8, 8.4,4.2, C.pink, 'Quartos com beliches e banheiros para os dias de tratamento.', 'dorm'],
-    ['Copa das famílias', 23.6,9.8, 4,4.2, C.green, 'Um cantinho de apoio para quem está hospedado.', 'copa'],
-    ['Almoxarifado de campanhas', 29,5, 5,8.8, C.grey, 'Guarda os materiais das campanhas, como a do tijolinho.', 'shelves'],
+    ['Copa das famílias', 23.6,9.8, 4.4,4.2, C.green, 'Um cantinho de apoio para quem está hospedado.', 'copa'],
   ]},
   '2': { label:'2º pavimento', y:LVL*2, rooms:[
-    ['Salão multiuso', 0,0, 28.6,14, C.yellow, 'Um grande espaço para eventos, festas, formações e os encontros da comunidade Viver.', 'hall'],
-    ['Caixa d’água e área técnica', 29,4, 5,6, C.grey, 'A infraestrutura que mantém a casa inteira funcionando.', null],
+    ['Salão multiuso', 0,0, 28.6,7.6, C.yellow, 'Um grande espaço para eventos, festas, formações e os encontros da comunidade Viver. Fica sobre a ala da frente.', 'hall'],
+    ['Caixa d’água e área técnica', 29.4,1, 4.2,5.6, C.grey, 'A infraestrutura que mantém a casa inteira funcionando.', null],
   ]},
 };
 
@@ -601,8 +604,8 @@ const FURN = {
     for (let i = 0; i < 5; i++) carMesh(g, x + 2.4 + i*3.5, z + 2.2, i);
   },
   hall(g, x, z, w, d){
-    box(g, M.wood, 5, .5, 3.4, x + w - 3.2, .25, z + d/2);
-    for (let i = 0; i < 5; i++) roundTable(g, x + 3 + (i%3)*4.4, z + 3 + Math.floor(i/3)*5.4, C.yellow);
+    box(g, M.wood, 4.4, .5, d - 2.2, x + w - 2.8, .25, z + d/2);
+    for (let i = 0; i < 6; i++) roundTable(g, x + 3 + (i%3)*4.6, z + 2.1 + Math.floor(i/3)*3.4, C.yellow);
   },
 };
 
@@ -614,23 +617,47 @@ function buildFloor(key, f){
   grp.add(shell, inner);
   const y0 = f.y;
 
-  box(inner, M.slab.clone(), BW + 1.2, SLAB, BD + 1.2, BW/2, y0 + SLAB/2, BD/2);
+  const SLABS = {
+    '-1': [[-.6, -.6, BW + 1.2, BD + 1.2]],
+    '0':  [[-.6, -.6, BW + 1.2, BD + 1.2]],
+    '1':  [[-.6, -.6, BW + 1.8, 8.5], [-.6, 9.5, 29.2, 5.1], [28.4, 7.9, 6.8, 1.6]],
+    '2':  [[-.6, -.6, BW + 1.8, 8.5]],
+  }[key];
+  SLABS.forEach(([sx, sz, sw, sd]) =>
+    box(inner, M.slab.clone(), sw, SLAB, sd, sx + sw/2, y0 + SLAB/2, sz + sd/2));
 
   const wallMat = key === '0' ? M.brick : M.wall;
   const wt = .3;
-  if (key !== '-1'){
-    const mk = (w, d, x, z) => box(shell, wallMat.clone(), w, H, d, x, y0 + SLAB + H/2, z);
-    mk(BW + 1.2, wt, BW/2, -wt/2);
-    mk(BW + 1.2, wt, BW/2, BD + wt/2);
-    mk(wt, BD, -wt/2, BD/2);
-    mk(wt, BD, BW + wt/2 + .45, BD/2);
-    for (let i = 0; i < 9; i++){
-      const gx = 2.6 + i*3.4;
-      box(shell, M.glass.clone(), 2.2, 1.1, .1, gx, y0 + SLAB + H - .95, -wt - .03, false);
-      box(shell, M.frame.clone(), 2.4, 1.3, .06, gx, y0 + SLAB + H - .95, -wt - .1, false);
-      box(shell, M.glass.clone(), 2.2, 1.1, .1, gx, y0 + SLAB + H - .95, BD + wt + .03, false);
-      box(shell, M.frame.clone(), 2.4, 1.3, .06, gx, y0 + SLAB + H - .95, BD + wt + .1, false);
+  const mk = (w, d, x, z) => box(shell, wallMat.clone(), w, H, d, x, y0 + SLAB + H/2, z);
+  const ring = (x0, z0, w, d) => {
+    mk(w + wt*2, wt, x0 + w/2, z0 - wt/2);
+    mk(w + wt*2, wt, x0 + w/2, z0 + d + wt/2);
+    mk(wt, d, x0 - wt/2, z0 + d/2);
+    mk(wt, d, x0 + w + wt/2, z0 + d/2);
+  };
+  const winRow = (zPos, flip, x0 = 2.6, x1 = BW - 1.5) => {
+    for (let gx = x0; gx < x1; gx += 3.4){
+      box(shell, M.glass.clone(), 2.2, 1.1, .1, gx, y0 + SLAB + H - .95, zPos + (flip ? .03 : -.03), false);
+      box(shell, M.frame.clone(), 2.4, 1.3, .06, gx, y0 + SLAB + H - .95, zPos + (flip ? .1 : -.1), false);
     }
+  };
+  if (key === '0'){
+    ring(0, 0, BW + .6, BD);
+    winRow(-wt, false); winRow(BD + wt, true);
+  } else if (key === '1'){
+    ring(0, 0, BW + .6, 7.6);
+    ring(0, 9.8, 28.6, 4.2);
+    winRow(-wt, false);
+    winRow(14 + wt, true, 1.2, 27.5);
+    // claraboia metálica sobre o vão central (pé-direito duplo do térreo)
+    const sky = box(shell, M.glass.clone(), 28.6, .12, 2, 14.3, y0 + SLAB + H*.5, 8.7, false);
+    sky.rotation.x = -.09;
+    for (let i = 0; i < 7; i++)
+      box(shell, M.metal.clone(), .14, .14, 2.1, 1.8 + i*4.3, y0 + SLAB + H*.5 + .07, 8.7, false);
+  } else if (key === '2'){
+    ring(0, 0, BW + .6, 7.6);
+    winRow(-wt, false);
+    winRow(7.6 + wt, true, 1.2, 27.5);
   } else {
     box(shell, M.wall.clone(), 15, H, wt, 7.5, y0 + SLAB + H/2, 0);
     box(shell, M.wall.clone(), 15, H, wt, 7.5, y0 + SLAB + H/2, BD);
@@ -669,16 +696,24 @@ function buildFloor(key, f){
 }
 for (const [key, f] of Object.entries(FLOORS)) buildFloor(key, f);
 
-// ---------- cobertura ----------
+// ---------- cobertura: volume alto (frente) + volume baixo (dormitórios) ----------
 const roofG = new THREE.Group();
-box(roofG, M.slab.clone(), BW + 1.6, .35, BD + 1.6, BW/2, LVL*3 + SLAB, BD/2);
-[[BW + 1.6, .22, BW/2, -.11],[BW + 1.6, .22, BW/2, BD + .11]].forEach(([w, d, x, z]) =>
+box(roofG, M.slab.clone(), BW + 2, .35, 9.2, BW/2 + .1, LVL*3 + SLAB, 3.7);
+[[BW + 2, .22, BW/2 + .1, -.75],[BW + 2, .22, BW/2 + .1, 8.15]].forEach(([w, d, x, z]) =>
   box(roofG, M.wall.clone(), w, .9, d, x, LVL*3 + SLAB + .55, z));
-[[.22, BD, -.11, BD/2],[.22, BD, BW + .71, BD/2]].forEach(([w, d, x, z]) =>
+[[.22, 9, -.85, 3.7],[.22, 9, BW + 1.05, 3.7]].forEach(([w, d, x, z]) =>
   box(roofG, M.wall.clone(), w, .9, d, x, LVL*3 + SLAB + .55, z));
-box(roofG, M.wall.clone(), 4.6, 2.2, 5.4, 31.2, LVL*3 + SLAB + 1.3, 7);
-box(roofG, M.slab.clone(), 5, .3, 5.8, 31.2, LVL*3 + SLAB + 2.5, 7);
-box(roofG, M.yellow.clone(), .5, 1.6, 5.4, .1, LVL*3 + SLAB + .9, BD/2);
+box(roofG, M.wall.clone(), 4.2, 2.2, 5, 31.4, LVL*3 + SLAB + 1.3, 3.7);
+box(roofG, M.slab.clone(), 4.6, .3, 5.4, 31.4, LVL*3 + SLAB + 2.5, 3.7);
+box(roofG, M.yellow.clone(), .5, 1.6, 4.6, .2, LVL*3 + SLAB + .9, 3.7);
+// cobertura baixa dos dormitórios, com terraço e pergolado
+const roofSul = new THREE.Group();
+box(roofSul, M.slab.clone(), 29.6, .3, 5.2, 14.3, LVL*2 + SLAB + .15, 11.9);
+[[29.6, .18, 14.3, 14.35],[.18, 4.9, -.2, 11.9],[.18, 4.9, 28.8, 11.9]].forEach(([w, d, x, z]) =>
+  box(roofSul, M.wall.clone(), w, .6, d, x, LVL*2 + SLAB + .6, z));
+for (let i = 0; i < 6; i++)
+  box(roofSul, M.wood.clone(), .16, .14, 3.6, 1.2 + i*.85, LVL*2 + SLAB + 1.05, 11.9, false);
+roofG.add(roofSul);
 scene.add(roofG);
 
 // ---------- fachada frontal ----------
